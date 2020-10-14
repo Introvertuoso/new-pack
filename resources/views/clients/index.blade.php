@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Clients') }}
-        </h2>
+        <div class="flex screen-w">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Clients') }}
+            </h2>
+
+            <div class="ml-10 rounded-md shadow">
+                @livewire('create-client-form')
+            </div>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

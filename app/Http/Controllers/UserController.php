@@ -30,6 +30,7 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('write-user');
+        echo "Hello";
     }
 
     /**

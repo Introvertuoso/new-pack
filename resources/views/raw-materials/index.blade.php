@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Raw Materials') }}
-        </h2>
+        <div class="flex screen-w">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Raw Materials') }}
+            </h2>
+
+            <div class="ml-10 rounded-md shadow">
+                @livewire('create-raw-material-form')
+            </div>
+        </div>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -34,11 +40,13 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap">
                                             @if($material->condition == 'good')
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                <span
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                     {{ $material->condition }}
                                                 </span>
                                             @elseif($material->condition == 'bad')
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                <span
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                                                     {{ $material->condition }}
                                                 </span>
                                             @endif

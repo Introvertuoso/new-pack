@@ -14,8 +14,8 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('clients')->insert([
-            'name' => 'Fireman',
+        DB::table('products')->insert([
+            'client_name' => 'Fireman',
             'amount' => '0',
         ]);
     }

@@ -14,7 +14,7 @@ class RawMaterialSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('clients')->insert([
+        DB::table('raw_materials')->insert([
             'name' => 'Spanish 2mm Paper',
             'condition' => 'good',
             'amount' => '1000'

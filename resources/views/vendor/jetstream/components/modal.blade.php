@@ -1,7 +1,7 @@
 @props(['id', 'maxWidth'])
 
 @php
-    $id = $id ?? md5($attributes->wire('model'));
+    $id = $id ;
 
     switch ($maxWidth ?? '2xl') {
         case 'sm':
