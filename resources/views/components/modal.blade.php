@@ -1,82 +1,93 @@
-{{--@php--}}
-{{--    dd($attributes->wire('model'))--}}
-{{--@endphp--}}
+<div wire:ignore.self class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
-<div x-data="{ show: @entangle($attributes->wire('model')) }" x-show="show == true">
-    Hello
-    {{ $attributes->wire('model')->value }}
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+        <div
+            class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+            <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                 viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+
+                </path>
+            </svg>
+            <span class="text-sm">
+                (Esc)
+            </span>
+        </div>
+
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="modal-content py-4 text-left px-6">
+            <!--Title-->
+            <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">
+                    {{ $title }}
+                </p>
+                <div class="modal-close cursor-pointer z-50">
+                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+
+                        </path>
+                    </svg>
+
+                </div>
+            </div>
+
+            <!--Body-->
+            {{ $content }}
+
+            <!--Footer-->
+
+            <div class="flex justify-end pt-2">
+                {{ $footer }}
+{{--                <button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">--}}
+{{--                    Action--}}
+{{--                </button>--}}
+{{--                <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">--}}
+{{--                    Close--}}
+{{--                </button>--}}
+            </div>
+
+        </div>
+    </div>
 </div>
 
-{{--@props(['id', 'maxWidth'])--}}
+<script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+        openmodal[i].addEventListener('click', function (event) {
+            event.preventDefault()
+            toggleModal()
+        })
+    }
 
-{{--@php--}}
-{{--    $id = $id ;--}}
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
 
-{{--    switch ($maxWidth ?? '2xl') {--}}
-{{--        case 'sm':--}}
-{{--            $maxWidth = 'sm:max-w-sm';--}}
-{{--            break;--}}
-{{--        case 'md':--}}
-{{--            $maxWidth = 'sm:max-w-md';--}}
-{{--            break;--}}
-{{--        case 'lg':--}}
-{{--            $maxWidth = 'sm:max-w-lg';--}}
-{{--            break;--}}
-{{--        case 'xl':--}}
-{{--            $maxWidth = 'sm:max-w-xl';--}}
-{{--            break;--}}
-{{--        case '2xl':--}}
-{{--        default:--}}
-{{--            $maxWidth = 'sm:max-w-2xl';--}}
-{{--            break;--}}
-{{--    }--}}
-{{--@endphp--}}
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+        closemodal[i].addEventListener('click', toggleModal)
+    }
 
-{{--<div--}}
-{{--    x-data="{--}}
-{{--        show: @entangle($attributes->wire('model')),--}}
-{{--        focusables() {--}}
-{{--            // All focusable element types...--}}
-{{--            let selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'--}}
+    document.onkeydown = function (evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+            isEscape = (evt.keyCode === 27)
+        }
+        if (isEscape && document.body.classList.contains('modal-active')) {
+            toggleModal()
+        }
+    };
 
-{{--            return [...$el.querySelectorAll(selector)]--}}
-{{--                // All non-disabled elements...--}}
-{{--                .filter(el => ! el.hasAttribute('disabled'))--}}
-{{--        },--}}
-{{--        firstFocusable() { return this.focusables()[0] },--}}
-{{--        lastFocusable() { return this.focusables().slice(-1)[0] },--}}
-{{--        nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },--}}
-{{--        prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },--}}
-{{--        nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },--}}
-{{--        prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },--}}
-{{--    }"--}}
-{{--    x-on:close.stop="show = false"--}}
-{{--    x-on:keydown.escape.window="show = false"--}}
-{{--    x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"--}}
-{{--    x-on:keydown.shift.tab.prevent="prevFocusable().focus()"--}}
-{{--    x-show="show"--}}
-{{--    id="{{ $id }}"--}}
-{{--    class="fixed top-0 inset-x-0 px-4 pt-6 z-50 sm:px-0 sm:flex sm:items-top sm:justify-center"--}}
-{{--    style="display: none;"--}}
-{{-->--}}
-{{--    <div x-show="show" class="fixed inset-0 transform transition-all" x-on:click="show = false"--}}
-{{--         x-transition:enter="ease-out duration-300"--}}
-{{--         x-transition:enter-start="opacity-0"--}}
-{{--         x-transition:enter-end="opacity-100"--}}
-{{--         x-transition:leave="ease-in duration-200"--}}
-{{--         x-transition:leave-start="opacity-100"--}}
-{{--         x-transition:leave-end="opacity-0">--}}
-{{--        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>--}}
-{{--    </div>--}}
 
-{{--    <div x-show="show"--}}
-{{--         class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }}"--}}
-{{--         x-transition:enter="ease-out duration-300"--}}
-{{--         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"--}}
-{{--         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"--}}
-{{--         x-transition:leave="ease-in duration-200"--}}
-{{--         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"--}}
-{{--         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">--}}
-{{--        {{ $slot }}--}}
-{{--    </div>--}}
-{{--</div>--}}
+    function toggleModal() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active')
+    }
+</script>

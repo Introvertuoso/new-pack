@@ -8,8 +8,6 @@ use Livewire\Component;
 
 class CreateClientForm extends Component
 {
-    public $confirmingClientCreation = false;
-
     public $name = '';
     public $contact = '';
     public $address = '';
@@ -20,14 +18,11 @@ class CreateClientForm extends Component
         $this->contact =  '';
         $this->address = '';
 
-        $this->dispatchBrowserEvent('confirming-create-client');
-
-//        $this->confirmingClientCreation = true;
-        $this->confirmingClientCreation = !$this->confirmingClientCreation;
+//        $this->dispatchBrowserEvent('confirming-create-client');
     }
 
     public function createClient() {
-
+        dd([$this->name, $this->contact, $this->address]);
     }
 
     public function render() {
