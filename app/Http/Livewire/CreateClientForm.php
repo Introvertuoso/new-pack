@@ -3,6 +3,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Client;
 use Livewire\Component;
 
 
@@ -22,7 +23,12 @@ class CreateClientForm extends Component
     }
 
     public function createClient() {
-        dd([$this->name, $this->contact, $this->address]);
+        $client = new Client();
+        $client->name = $this->name;
+        $client->contact = $this->contact;
+        $client->address = $this->address;
+        $client->save();
+        redirect('clients');
     }
 
     public function render() {

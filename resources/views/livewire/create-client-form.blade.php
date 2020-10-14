@@ -1,10 +1,10 @@
 <div x-data=
      "{
-        name: @entangle('name').defer
+        name:    @entangle('name').defer
         address: @entangle('address').defer
         contact: @entangle('contact').defer
     }">
-    <x-jet-button class="modal-open" wire:loading.attr="disabled">
+    <x-jet-button class="modal-open" wire:click="confirmClientCreation" wire:loading.attr="disabled">
         {{ __('Add Client') }}
     </x-jet-button>
 
@@ -63,7 +63,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="createClient" wire:loading.attr="disabled">
+            <x-jet-button class="modal-close ml-2" wire:click="createClient" wire:loading.attr="disabled">
                 {{ __('Confirm') }}
             </x-jet-button>
         </x-slot>

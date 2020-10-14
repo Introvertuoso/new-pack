@@ -1,13 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Roles') }}
-        </h2>
+        <div class="flex screen-w">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Roles') }}
+            </h2>
 
-        <div class="ml-10 rounded-md shadow">
-            @livewire('create-role-form')
+            <div class="ml-10 rounded-md shadow">
+                @livewire('create-role-form')
+            </div>
         </div>
-
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -48,7 +49,8 @@
                                         <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                                             <!-- TODO: make the edit go somewhere -->
                                             @can('write-role', auth()->user())
-                                                <a href="/roles/{{$role}}/edit" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="/roles/{{$role}}/edit"
+                                                   class="text-indigo-600 hover:text-indigo-900">
                                                     Edit
                                                 </a>
                                             @endcan
