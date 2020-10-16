@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RawMaterial extends Model
 {
     use HasFactory;
+
+    /**
+     * @var mixed|string
+     */
 }
