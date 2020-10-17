@@ -15,7 +15,7 @@ class CreateProductForm extends Component
     public $clientName = '';
     public $amount = '';
 
-    public function confirmClientCreation()
+    public function confirmProductCreation()
     {
         $this->clientName = '';
         $this->amount =  '';
@@ -27,10 +27,10 @@ class CreateProductForm extends Component
 
     public function createProduct() {
         $product = new Product();
-        $product->clientName = $this-> clientName;
+        $product->client_name = $this-> clientName;
         $product->amount = $this-> amount;
         $product -> save();
-        redirect( 'product');
+        redirect( 'products');
     }
 
     public function render() {
