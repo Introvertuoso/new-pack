@@ -17,6 +17,9 @@
                 <x-slot name="title">
                     {{ __('Name') }}
                 </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
+                </x-slot>
                 <x-slot name="attribute">
                     {{ __('name') }}
                 </x-slot>
@@ -32,6 +35,9 @@
                 <x-slot name="title">
                     {{ __('Condition') }}
                 </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
+                </x-slot>
                 <x-slot name="attribute">
                     {{ __('condition') }}
                 </x-slot>
@@ -46,6 +52,9 @@
             <x-input>
                 <x-slot name="title">
                     {{ __('Amount') }}
+                </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
                 </x-slot>
                 <x-slot name="attribute">
                     {{ __('amount') }}

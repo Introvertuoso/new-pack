@@ -4,6 +4,7 @@
         address: @entangle('address').defer
         contact: @entangle('contact').defer
     }">
+
     <x-jet-button class="modal-open" wire:click="confirmClientCreation" wire:loading.attr="disabled">
         {{ __('Add Client') }}
     </x-jet-button>
@@ -16,6 +17,9 @@
             <x-input>
                 <x-slot name="title">
                     {{ __('Name') }}
+                </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
                 </x-slot>
                 <x-slot name="attribute">
                     {{ __('name') }}
@@ -32,6 +36,9 @@
                 <x-slot name="title">
                     {{ __('Address') }}
                 </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
+                </x-slot>
                 <x-slot name="attribute">
                     {{ __('address') }}
                 </x-slot>
@@ -46,6 +53,9 @@
             <x-input>
                 <x-slot name="title">
                     {{ __('Contact') }}
+                </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
                 </x-slot>
                 <x-slot name="attribute">
                     {{ __('contact') }}

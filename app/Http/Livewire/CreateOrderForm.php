@@ -3,34 +3,54 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Client;
 use Livewire\Component;
 
 
 class CreateOrderForm extends Component
 {
-//    // TODO: Convert to Ability related stuff and namings !!! WATCH OUT !!! ALL WAS COPY-PASTED !!!
-//    public $confirmingClientCreation = false;
-//
-//    public $name = '';
-//    public $contact = '';
-//    public $address = '';
-//
-//    public function confirmClientCreation()
-//    {
-//        $this->name = '';
-//        $this->contact =  '';
-//        $this->address = '';
-//
+    // TODO: change approved to timestamp
+    public $query = '';
+    public $approved = 0;
+    public $total = 0;
+    public $client;
+    public $clientName = '';
+    public $user;
+    public $userName = '';
+
+    public function confirmOrderCreation()
+    {
+        $this->query = '';
+        $this->approved = 0;
+        $this->total =  0;
+        $this->client = null;
+        $this->clientName = '';
+        $this->user = auth()->user();
+        $this->userName = $this->user->name;
+
 //        $this->dispatchBrowserEvent('confirming-create-client');
-//
-//        $this->confirmingClientCreation = true;
-//    }
-//
-//    public function createClient() {
-//
-//    }
-//
-//    public function render() {
-//        return view('livewire.create-order-form');
-//    }
+    }
+
+    public function pickClient($value) {
+        $client = Client::where('id', $value)->first();
+        $this->client = $client;
+        $this->query = $client->name;
+        $this->clientName = $client->name;
+    }
+
+    public function createOrder() {
+        // TODO: Do this for all:
+        // TODO: Required field trick from course on the front-end as well as on the back-end
+        $order = new Order();
+        $order->approved = $this->approved;
+        $order->total = $this->total;
+        $order->client_id = $this->client->id;
+        $order->user_id = $this->user->id;
+        $order->save();
+        redirect('orders');
+    }
+
+    public function render() {
+        return view('livewire.create-order-form');
+    }
 }

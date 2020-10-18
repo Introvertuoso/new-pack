@@ -15,6 +15,9 @@
                 <x-slot name="title">
                     {{ __('Name') }}
                 </x-slot>
+                <x-slot name="readonly">
+                    {{ __('false') }}
+                </x-slot>
                 <x-slot name="attribute">
                     {{ __('name') }}
                 </x-slot>
