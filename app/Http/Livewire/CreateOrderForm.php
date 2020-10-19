@@ -11,7 +11,10 @@ class CreateOrderForm extends Component
 {
     // TODO: change approved to timestamp
     public $query = '';
+
     public $approved = 0;
+    public $totalPreDiscount = 0;
+    public $discount = 0.0;
     public $total = 0;
     public $client;
     public $clientName = '';
@@ -22,6 +25,8 @@ class CreateOrderForm extends Component
     {
         $this->query = '';
         $this->approved = 0;
+        $this->totalPreDiscount = 0;
+        $this->discount = 0.0;
         $this->total =  0;
         $this->client = null;
         $this->clientName = '';

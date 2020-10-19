@@ -9,15 +9,17 @@ use Livewire\Component;
 
 class CreateProductForm extends Component
 {
-//    // TODO: Convert to Ability related stuff and namings !!! WATCH OUT !!! ALL WAS COPY-PASTED !!!
+    // TODO: Convert to Ability related stuff and namings !!! WATCH OUT !!! ALL WAS COPY-PASTED !!!
     public $confirmingProductCreation = false;
 
     public $clientName = '';
+    public $type = '';
     public $amount = '';
 
     public function confirmProductCreation()
     {
         $this->clientName = '';
+        $this->type = '';
         $this->amount =  '';
 
         $this->dispatchBrowserEvent('confirming-create-product');
