@@ -30,6 +30,7 @@
             </x-input>
 
         </x-slot>
+
         <x-slot name="footer">
             <x-jet-secondary-button class="modal-close">
                 {{ __('Cancel') }}
@@ -40,5 +41,4 @@
             </x-jet-button>
         </x-slot>
     </x-modal>
-
 </div>

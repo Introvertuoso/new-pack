@@ -17,6 +17,13 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             'client_name' => 'Fireman',
             'amount' => '0',
+            'type' => 'offset'
+        ]);
+
+        DB::table('products')->insert([
+            'client_name' => 'Fireman',
+            'amount' => '0',
+            'type' => 'flexographic'
         ]);
     }
 }

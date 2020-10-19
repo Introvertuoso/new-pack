@@ -11,7 +11,7 @@
             display: none;
         }
     </style>
-    <select x-cloak id="select">
+    <select x-cloak id="select-{{ $title }}">
         @foreach($entities as $entity)
             <option value="{{ $entity->id }}">{{ $entity->id }} ({{ $entity->client_name }})</option>
         @endforeach
@@ -145,16 +145,18 @@
 
                 },
                 loadOptions() {
-                    const options = document.getElementById('select').options;
+                    this.options.push({
+                        key: {{ $title }},
+                        value: []
+                    });
+                    const options = document.getElementById('select-{{ $title }}').options;
                     for (let i = 0; i < options.length; i++) {
-                        this.options.push({
+                        this.options..push({
                             value: options[i].value,
                             text: options[i].innerText,
                             selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
                         });
                     }
-
-
                 },
                 selectedValues() {
                     return this.selected.map((option) => {

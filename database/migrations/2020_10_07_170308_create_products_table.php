@@ -12,6 +12,7 @@ class CreateProductsTable extends Migration
             $table->id();
             // TODO: Need to make this an unsignedBigInteger for the products() to work
             $table->string('client_name')->nullable();
+            $table->string('type');
             // Code?
             // TODO: Maybe replace this here attribute
             // TODO: and create a new table with a one-to-one relationship with this one?
