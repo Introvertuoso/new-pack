@@ -17,7 +17,7 @@
         @endforeach
     </select>
 
-    <div x-data="dropdown()" x-init="loadOptions()">
+    <div x-data="dropdown()" x-init="loadOptions('{{ $title }}')">
         <form>
             <input name="values" type="hidden" x-bind:value="selectedValues()">
 
@@ -144,19 +144,16 @@
 
 
                 },
-                loadOptions() {
-                    this.options.push({
-                        key: {{ $title }},
-                        value: []
-                    });
-                    const options = document.getElementById('select-{{ $title }}').options;
+                loadOptions(id) {
+                    const options = document.getElementById('select-' + id).options;
                     for (let i = 0; i < options.length; i++) {
-                        this.options..push({
+                        this.options.push({
                             value: options[i].value,
                             text: options[i].innerText,
                             selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
                         });
                     }
+
                 },
                 selectedValues() {
                     return this.selected.map((option) => {
