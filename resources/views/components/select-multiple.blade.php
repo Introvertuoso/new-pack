@@ -128,7 +128,6 @@
                 select(index, event) {
 
                     if (!this.options[index].selected) {
-
                         this.options[index].selected = true;
                         this.options[index].element = event.target;
                         this.selected.push(index);
