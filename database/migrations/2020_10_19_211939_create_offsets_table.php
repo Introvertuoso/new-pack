@@ -36,6 +36,6 @@ class CreateOffsetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offsets');
+
     }
 }

@@ -12,7 +12,7 @@
      "
 >
 
-    <x-jet-button class="modal-open" wire:click="confirmOrderCreation" wire:loading.attr="disabled">
+    <x-jet-button onclick="toggleModal('Add Order')" wire:click="confirmOrderCreation" wire:loading.attr="disabled">
         {{ __('Add Order') }}
     </x-jet-button>
 
@@ -51,6 +51,10 @@
                                 {{ __('clientName') }}
                             @endslot
                         @endcomponent
+
+{{--                        <div class="ml-10 rounded-md shadow">--}}
+{{--                            @livewire('create-client-form')--}}
+{{--                        </div>--}}
 
                         <x-input>
                             <x-slot name="title">
@@ -106,40 +110,44 @@
                             </x-slot>
                         </x-input>
                     </div>
-                    <div class="pl-6 pt-3">
-                        <h1 class="text-lg mb-16">
+                    <div class="pl-6">
+                        <h1 class="text-lg">
                             Products:
                         </h1>
 
-                        @component('components.select-multiple',
-                                ['entities' => \App\Models\Product::where('type', 'flexographic')->get()])
-                            @slot('title')
-                                {{ __('Flexographic') }}
-                            @endslot
-                        @endcomponent
+                        <div>
+                            @component('components.select-multiple',
+                                    ['entities' => \App\Models\Product::where('type', 'flexographic')->get()])
+                                @slot('title')
+                                    {{ __('Flexographic') }}
+                                @endslot
+                            @endcomponent
+                        </div>
 
                         <div class="p-3">
                         </div>
 
-                        @component('components.select-multiple',
-                                ['entities' => \App\Models\Product::where('type', 'offset')->get()])
-                            @slot('title')
-                                {{ __('Offset') }}
-                            @endslot
-                        @endcomponent
+                        <div>
+                            @component('components.select-multiple',
+                                    ['entities' => \App\Models\Product::where('type', 'offset')->get()])
+                                @slot('title')
+                                    {{ __('Offset') }}
+                                @endslot
+                            @endcomponent
+                        </div>
                     </div>
                 </div>
             </div>
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button class="modal-close">
-                {{ __('Cancel') }}
-            </x-jet-secondary-button>
-
-            <x-jet-button class="modal-close ml-2" wire:click="createOrder" wire:loading.attr="disabled">
+            <x-jet-button onclick="toggleModal('Add Order')" class="mr-2" wire:click="createOrder" wire:loading.attr="disabled">
                 {{ __('Confirm') }}
             </x-jet-button>
+
+            <x-jet-secondary-button onclick="toggleModal('Add Order')">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
         </x-slot>
     </x-modal>
 </div>

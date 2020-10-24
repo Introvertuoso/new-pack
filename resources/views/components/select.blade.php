@@ -13,9 +13,12 @@
 </style>
 
 
-<div class="flex-auto flex flex-col m-2 ">
-    <h1>
+<div class="flex-auto flex flex-col m-2">
+    <h1 class="text-base">
         {{ $title }}
+{{--        <div class="ml-10 rounded-md shadow">--}}
+{{--            @livewire('create-client-form')--}}
+{{--        </div>--}}
     </h1>
 
     <div class="flex flex-col items-center relative">
@@ -43,9 +46,9 @@
 {{--                        </svg>--}}
 {{--                    </button>--}}
                 </div>
-                <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
-                    <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
-                        <svg class="open-list drop-button feather feather-chevron-up w-4 h-4" fill="none" height="100%" stroke="currentColor"
+                <div class="open-list cursor-pointer text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
+                    <button class="w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                        <svg class="drop-button feather feather-chevron-up w-4 h-4" fill="none" height="100%" stroke="currentColor"
                              style="transform: rotate(180deg)"
                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
                              width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -60,9 +63,9 @@
 
                 @foreach($entities as $entity)
                     @if($loop->first)
-                        <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100" style="">
+                        <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-600">
                             <div
-                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100 hover:border-teal-600"
+                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
                                 wire:click="pickClient({{ $entity->id }})"
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
@@ -74,9 +77,9 @@
                         </div>
 
                     @elseif($loop->last)
-                        <div class="cursor-pointer w-full border-gray-100 rounded-b hover:bg-teal-100 " style="">
+                        <div class="cursor-pointer w-full border-gray-100 rounded-b hover:bg-teal-600">
                             <div
-                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100 hover:border-teal-600"
+                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
                                 wire:click="pickClient({{ $entity->id }})"
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
@@ -88,9 +91,9 @@
                         </div>
 
                     @else
-                        <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100 " style="">
+                        <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-600">
                             <div
-                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:text-teal-100"
+                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 "
                                 wire:click="pickClient({{ $entity->id }})"
                                 wire:loading.attr="disabled">
 {{--                                TODO: Make these abstracted?--}}
@@ -137,6 +140,6 @@
 
     var closelist = document.querySelectorAll('.close-list')
     for (var i = 0; i < closelist.length; i++) {
-        closelist[i].addEventListener('click', toggleModal)
+        closelist[i].addEventListener('click', toggleList)
     }
 </script>

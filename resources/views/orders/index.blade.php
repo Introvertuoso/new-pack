@@ -14,9 +14,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
+                    <div
+                        class="w-full md:w-4/5 xl:w-3/5  mx-auto px-2 py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div
+                            class="p-8 mt-6 lg:mt-0 rounded bg-white overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table id="example" class="table table-hover table-bordered" style="width: 100%">
                                 <thead>
                                 <tr>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -41,10 +43,10 @@
 
                                 @foreach($orders as $order)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <td class="px-6 py-2 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                             {{ $order->id }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
+                                        <td class="px-6 py-2 whitespace-no-wrap">
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-sm leading-5 font-medium text-gray-900">
@@ -56,10 +58,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <td class="px-6 py-2 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                             {{ $order->total }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
+                                        <td class="px-6 py-2 whitespace-no-wrap">
                                             @if($order->approved == 1)
                                                 <span
                                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -72,7 +74,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
+                                        <td class="px-6 py-2 whitespace-no-wrap">
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-sm leading-5 font-medium text-gray-900">
@@ -84,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                        <td class="px-6 py-2 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                                             <!-- TODO: make the edit go somewhere -->
                                             @can('write-order', auth()->user())
                                                 <a href="/orders/{{$order}}/edit"
@@ -103,4 +105,9 @@
             </div>
         </div>
     </div>
+
+    <x-datatables>
+
+    </x-datatables>
+
 </x-app-layout>

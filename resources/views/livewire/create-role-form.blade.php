@@ -2,7 +2,7 @@
      "{
         name:    @entangle('name').defer
     }">
-    <x-jet-button class="modal-open" wire:click="confirmRoleCreation" wire:loading.attr="disabled">
+    <x-jet-button class="popup-open" wire:click="confirmRoleCreation" wire:loading.attr="disabled">
         {{ __('Add Role') }}
     </x-jet-button>
 
@@ -31,13 +31,14 @@
 
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button class="modal-close">
+            <x-jet-button class="popup-close mr-2" wire:click="createRole" wire:loading.attr="disabled">
+                {{ __('Confirm') }}
+            </x-jet-button>
+
+            <x-jet-secondary-button class="popup-close">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="modal-close ml-2" wire:click="createRole" wire:loading.attr="disabled">
-                {{ __('Confirm') }}
-            </x-jet-button>
         </x-slot>
     </x-modal>
 

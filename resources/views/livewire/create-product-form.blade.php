@@ -3,7 +3,7 @@
         clientName:    @entangle('clientName').defer
         amount: @entangle('amount').defer
     }">
-    <x-jet-button class="modal-open" wire:click="confirmProductCreation" wire:loading.attr="disabled">
+    <x-jet-button class="popup-open" wire:click="confirmProductCreation" wire:loading.attr="disabled">
         {{ __('Add Product') }}
     </x-jet-button>
 
@@ -49,13 +49,14 @@
             </x-input>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button class="modal-close">
+            <x-jet-button class="popup-close mr-2" wire:click="createProduct" wire:loading.attr="disabled">
+                {{ __('Confirm') }}
+            </x-jet-button>
+
+            <x-jet-secondary-button class="popup-close">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="modal-close ml-2" wire:click="createProduct" wire:loading.attr="disabled">
-                {{ __('Confirm') }}
-            </x-jet-button>
         </x-slot>
     </x-modal>
 

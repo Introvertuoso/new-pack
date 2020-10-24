@@ -1,6 +1,6 @@
 <div class="wrapper px-2 w-full py-3">
     <div class="flex flex-col space-y-3">
-        <h1>
+        <h1 class="text-base">
             {{ $title }}
         </h1>
 

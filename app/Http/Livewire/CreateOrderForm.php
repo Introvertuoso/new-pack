@@ -4,6 +4,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Models\Order;
 use Livewire\Component;
 
 

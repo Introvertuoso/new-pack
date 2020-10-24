@@ -5,7 +5,7 @@
         contact: @entangle('contact').defer
     }">
 
-    <x-jet-button class="modal-open" wire:click="confirmClientCreation" wire:loading.attr="disabled">
+    <x-jet-button onclick="toggleModal('Add Client')" wire:click="confirmClientCreation" wire:loading.attr="disabled">
         {{ __('Add Client') }}
     </x-jet-button>
 
@@ -69,13 +69,14 @@
             </x-input>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button class="modal-close">
+            <x-jet-button onclick="toggleModal('Add Client')" class="mr-2" wire:click="createClient" wire:loading.attr="disabled">
+                {{ __('Confirm') }}
+            </x-jet-button>
+
+            <x-jet-secondary-button onclick="toggleModal('Add Client')">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="modal-close ml-2" wire:click="createClient" wire:loading.attr="disabled">
-                {{ __('Confirm') }}
-            </x-jet-button>
         </x-slot>
     </x-modal>
 
