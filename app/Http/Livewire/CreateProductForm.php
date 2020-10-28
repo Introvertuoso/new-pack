@@ -14,28 +14,43 @@ class CreateProductForm extends Component
 
     public $clientName = '';
     public $type = '';
+    public $flexographicDetails = '';
+    public $offsetDetails = '';
     public $amount = '';
 
     public function confirmProductCreation()
     {
         $this->clientName = '';
         $this->type = '';
-        $this->amount =  '';
+        $this->amount = '';
 
         $this->dispatchBrowserEvent('confirming-create-product');
 
         $this->confirmingProductCreation = true;
     }
 
-    public function createProduct() {
+    public function createProduct()
+    {
         $product = new Product();
-        $product->client_name = $this-> clientName;
-        $product->amount = $this-> amount;
-        $product -> save();
-        redirect( 'products');
+        $product->client_name = $this->clientName;
+        $product->amount = $this->amount;
+        $product->save();
+        redirect('products');
     }
 
-    public function render() {
+    public function renderDetailsSection($printType)
+    {
+        if ($printType == 'Offset') {
+            $this->offsetDetails = view('livewire.offset-creation-details')->render();
+            $this->flexographicDetails = '';
+        } else if ($printType == 'Flexographic') {
+            $this->flexographicDetails = view('livewire.flexographic-creation-details')->render();
+            $this->offsetDetails = '';
+        }
+    }
+
+    public function render()
+    {
         return view('livewire.create-product-form');
     }
 }
