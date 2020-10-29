@@ -27,7 +27,7 @@ class CreateAbilityForm extends Component
         $ability = new Ability();
         $ability->name = $this->name;
         $ability->save();
-        redirect('abilities');
+        $this->emit('abilityCreationCompleted');
     }
 
     public function render() {

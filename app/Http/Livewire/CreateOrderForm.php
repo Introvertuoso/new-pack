@@ -5,6 +5,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Client;
 use App\Models\Order;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
 
@@ -21,6 +24,16 @@ class CreateOrderForm extends Component
     public $clientName = '';
     public $user;
     public $userName = '';
+
+    public $listeners = [
+        'productCreationCompleted' => 'refresh',
+        'clientCreationCompleted' => 'refresh',
+    ];
+
+    public function refresh() {
+        dd(\url()->current());
+        request()->post(url()->current());
+    }
 
     public function confirmOrderCreation()
     {
@@ -53,7 +66,7 @@ class CreateOrderForm extends Component
         $order->client_id = $this->client->id;
         $order->user_id = $this->user->id;
         $order->save();
-        redirect('orders');
+        $this->emit('orderCreationCompleted');
     }
 
     public function render() {

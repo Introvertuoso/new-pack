@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Gate;
 
 class AbilityController extends Controller
 {
+    public function __construct()
+    {
+//        $this->middleware('can:read-ability');
+//        $this->middleware('can:write-ability')->only();
+    }
+
     /**
      * Display a listing of the resource.
      *

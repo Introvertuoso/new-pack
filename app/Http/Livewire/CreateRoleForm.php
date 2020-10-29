@@ -28,7 +28,8 @@ class CreateRoleForm extends Component
         $Role = new Role();
         $Role->name = $this->name;
         $Role->save();
-        redirect('roles');
+
+        $this->emit('roleCreationCompleted');
     }
 //
     public function render() {

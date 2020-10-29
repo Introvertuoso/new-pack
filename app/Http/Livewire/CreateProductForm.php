@@ -3,6 +3,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Flexographic;
+use App\Models\Offset;
 use App\Models\Product;
 use Livewire\Component;
 
@@ -14,15 +16,18 @@ class CreateProductForm extends Component
 
     public $clientName = '';
     public $type = '';
+    public $amount = 0;
+    // TODO: Here goes the flexographic related inputs
+    // TODO: Here goes the offset related inputs
+
     public $flexographicDetails = '';
     public $offsetDetails = '';
-    public $amount = '';
 
     public function confirmProductCreation()
     {
         $this->clientName = '';
         $this->type = '';
-        $this->amount = '';
+        $this->amount = 0;
 
         $this->dispatchBrowserEvent('confirming-create-product');
 
@@ -34,8 +39,23 @@ class CreateProductForm extends Component
         $product = new Product();
         $product->client_name = $this->clientName;
         $product->amount = $this->amount;
+        $product->type = $this->type;
         $product->save();
-        redirect('products');
+
+        if ($this->type == 'flexographic') {
+            $flexographic = new Flexographic();
+            $flexographic->product_id = $product->id;
+            // TODO: Here goes the corresponding attributes
+            $flexographic->save();
+        }
+        else if ($this->type == 'offset') {
+            $offset = new Offset();
+            $offset->product_id = $product->id;
+            // TODO: Here goes the corresponding attributes
+            $offset->save();
+        }
+
+        $this->emit('productCreationCompleted');
     }
 
     public function renderDetailsSection($printType)
@@ -43,9 +63,11 @@ class CreateProductForm extends Component
         if ($printType == 'Offset') {
             $this->offsetDetails = view('livewire.offset-creation-details')->render();
             $this->flexographicDetails = '';
+            $this->type = 'offset';
         } else if ($printType == 'Flexographic') {
             $this->flexographicDetails = view('livewire.flexographic-creation-details')->render();
             $this->offsetDetails = '';
+            $this->type = 'flexographic';
         }
     }
 

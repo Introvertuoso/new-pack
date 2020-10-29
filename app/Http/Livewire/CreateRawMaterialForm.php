@@ -35,7 +35,8 @@ class CreateRawMaterialForm extends Component
         $rawMaterial->condition = $this->condition;
         $rawMaterial->amount = $this->amount;
         $rawMaterial->save();
-        redirect('raw-materials');
+
+        $this->emit('rawMaterialCreationCompleted');
     }
 
     public function render() {

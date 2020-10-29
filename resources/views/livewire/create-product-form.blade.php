@@ -4,6 +4,7 @@
         flexographicDetails:    @entangle('flexographicDetails').defer
         offsetDetails:          @entangle('offsetDetails').defer
         amount:                 @entangle('amount').defer
+        type:                   @entangle('type').defer
     }">
     <x-jet-button onclick="toggleModal('Add Product')" wire:click="confirmProductCreation" wire:loading.attr="disabled">
         {{ __('Add Product') }}
@@ -40,7 +41,7 @@
                                 {{ __('Amount') }}
                             </x-slot>
                             <x-slot name="readonly">
-                                {{ __('false') }}
+                                {{ __('true') }}
                             </x-slot>
                             <x-slot name="attribute">
                                 {{ __('amount') }}

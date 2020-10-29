@@ -28,7 +28,7 @@ class CreateClientForm extends Component
         $client->contact = $this->contact;
         $client->address = $this->address;
         $client->save();
-        redirect('clients');
+        $this->emit('clientCreationCompleted');
     }
 
     public function render() {

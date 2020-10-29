@@ -12,7 +12,6 @@
     }
 </style>
 
-
 <div class="flex-auto flex flex-col m-2">
     <h1 class="text-base">
         {{ $title }}

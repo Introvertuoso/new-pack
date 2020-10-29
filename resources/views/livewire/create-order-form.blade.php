@@ -46,6 +46,7 @@
                         @component('components.select', ['entities' => \App\Models\Client::all()])
                             @slot('title')
                                 {{ __('Client') }}
+                                @livewire('create-client-form')
                             @endslot
                             @slot('value')
                                 {{ __('clientName') }}
@@ -114,6 +115,7 @@
                         <h1 class="text-lg">
                             Products:
                         </h1>
+                        @livewire('create-product-form')
 
                         <div>
                             @component('components.select-multiple',
