@@ -45,7 +45,8 @@
 {{--                        </svg>--}}
 {{--                    </button>--}}
                 </div>
-                <div class="open-list cursor-pointer text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
+                <div onclick="toggleList('{{ $title }}')"
+                    class="cursor-pointer text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
                     <button class="w-6 h-6 text-gray-600 outline-none focus:outline-none">
                         <svg class="drop-button feather feather-chevron-up w-4 h-4" fill="none" height="100%" stroke="currentColor"
                              style="transform: rotate(180deg)"
@@ -57,14 +58,17 @@
                 </div>
             </div>
         </div>
-        <div class="list hidden pointer-events-none absolute shadow top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
+        <div
+            id="list-{{ $title }}"
+            class="opacity-0 pointer-events-none absolute shadow top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
             <div class="flex flex-col w-full">
 
                 @foreach($entities as $entity)
                     @if($loop->first)
                         <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-600">
                             <div
-                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
+                                onclick="toggleList('{{ $title }}')"
+                                class="flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
                                 wire:click="pickClient({{ $entity->id }})"
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
@@ -78,7 +82,8 @@
                     @elseif($loop->last)
                         <div class="cursor-pointer w-full border-gray-100 rounded-b hover:bg-teal-600">
                             <div
-                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
+                                onclick="toggleList('{{ $title }}')"
+                                class="flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
                                 wire:click="pickClient({{ $entity->id }})"
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
@@ -92,7 +97,8 @@
                     @else
                         <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-600">
                             <div
-                                class="close-list flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 "
+                                onclick="toggleList('{{ $title }}')"
+                                class="flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 "
                                 wire:click="pickClient({{ $entity->id }})"
                                 wire:loading.attr="disabled">
 {{--                                TODO: Make these abstracted?--}}
@@ -115,30 +121,30 @@
     var angle = 180;
     var closed = true
 
-    function toggleList() {
-        const body = document.querySelector('body')
-        const list = document.querySelector('.list')
+    function toggleList(id) {
+        // const body = document.querySelector('body')
+        const list = document.getElementById('list-' + id)
         const button = document.querySelector('.drop-button')
         angle = angle + 180
         if (angle == 360) {
             angle = 0
         }
         button.style.transform = 'rotate(' + angle + 'deg)'
-        list.classList.toggle('hidden')
+        list.classList.toggle('opacity-0')
         list.classList.toggle('pointer-events-none')
-        body.classList.toggle('list-active')
+        // body.classList.toggle('list-active')
     }
 
-    var openlist = document.querySelectorAll('.open-list')
-    for (var i = 0; i < openlist.length; i++) {
-        openlist[i].addEventListener('click', function (event) {
-            event.preventDefault()
-            toggleList()
-        })
-    }
-
-    var closelist = document.querySelectorAll('.close-list')
-    for (var i = 0; i < closelist.length; i++) {
-        closelist[i].addEventListener('click', toggleList)
-    }
+    // var openlist = document.querySelectorAll('.open-list')
+    // for (var i = 0; i < openlist.length; i++) {
+    //     openlist[i].addEventListener('click', function (event) {
+    //         event.preventDefault()
+    //         toggleList()
+    //     })
+    // }
+    //
+    // var closelist = document.querySelectorAll('.close-list')
+    // for (var i = 0; i < closelist.length; i++) {
+    //     closelist[i].addEventListener('click', toggleList)
+    // }
 </script>

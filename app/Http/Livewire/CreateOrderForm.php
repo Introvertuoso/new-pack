@@ -26,13 +26,11 @@ class CreateOrderForm extends Component
     public $userName = '';
 
     public $listeners = [
-        'productCreationCompleted' => 'refresh',
         'clientCreationCompleted' => 'refresh',
     ];
 
     public function refresh() {
-        dd(\url()->current());
-        request()->post(url()->current());
+        // TODO: This does nothing but is def cool
     }
 
     public function confirmOrderCreation()

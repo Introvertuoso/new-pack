@@ -43,19 +43,19 @@
                             </x-slot>
                         </x-input>
 
+                        @livewire('create-client-form')
                         @component('components.select', ['entities' => \App\Models\Client::all()])
                             @slot('title')
                                 {{ __('Client') }}
-                                @livewire('create-client-form')
                             @endslot
                             @slot('value')
                                 {{ __('clientName') }}
                             @endslot
                         @endcomponent
 
-{{--                        <div class="ml-10 rounded-md shadow">--}}
-{{--                            @livewire('create-client-form')--}}
-{{--                        </div>--}}
+                        {{--                        <div class="ml-10 rounded-md shadow">--}}
+                        {{--                            @livewire('create-client-form')--}}
+                        {{--                        </div>--}}
 
                         <x-input>
                             <x-slot name="title">
@@ -117,33 +117,44 @@
                         </h1>
                         @livewire('create-product-form')
 
-                        <div>
-                            @component('components.select-multiple',
-                                    ['entities' => \App\Models\Product::where('type', 'flexographic')->get()])
-                                @slot('title')
-                                    {{ __('Flexographic') }}
-                                @endslot
-                            @endcomponent
-                        </div>
+                        @component('components.select-multiple',
+                                ['entities' => \App\Models\Product::where('type', 'flexographic')->get()])
+                            @slot('title')
+                                {{ __('Flexographic') }}
+                            @endslot
+{{--                            @slot('listener')--}}
+{{--                                {{--}}
+{{--                                    __("window.livewire.on('productCreationCompleted', () => {--}}
+{{--                                        loadOptions();--}}
+{{--                                    })")--}}
+{{--                                }}--}}
+{{--                            @endslot--}}
+                        @endcomponent
 
                         <div class="p-3">
                         </div>
 
-                        <div>
-                            @component('components.select-multiple',
-                                    ['entities' => \App\Models\Product::where('type', 'offset')->get()])
-                                @slot('title')
-                                    {{ __('Offset') }}
-                                @endslot
-                            @endcomponent
-                        </div>
+                        @component('components.select-multiple',
+                                ['entities' => \App\Models\Product::where('type', 'offset')->get()])
+                            @slot('title')
+                                {{ __('Offset') }}
+                            @endslot
+{{--                            @slot('listener')--}}
+{{--                                {{--}}
+{{--                                    __("window.livewire.on('productCreationCompleted', () => {--}}
+{{--                                        loadOptions();--}}
+{{--                                    });")--}}
+{{--                                }}--}}
+{{--                            @endslot--}}
+                        @endcomponent
                     </div>
                 </div>
             </div>
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-button onclick="toggleModal('Add Order')" class="mr-2" wire:click="createOrder" wire:loading.attr="disabled">
+            <x-jet-button onclick="toggleModal('Add Order')" class="mr-2" wire:click="createOrder"
+                          wire:loading.attr="disabled">
                 {{ __('Confirm') }}
             </x-jet-button>
 

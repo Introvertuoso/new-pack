@@ -56,6 +56,7 @@ class CreateProductForm extends Component
         }
 
         $this->emit('productCreationCompleted');
+        $this->dispatchBrowserEvent('productCreationCompleted');
     }
 
     public function renderDetailsSection($printType)

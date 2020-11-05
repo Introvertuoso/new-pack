@@ -93,6 +93,9 @@
 
 </head>
 <body class="font-sans antialiased">
+
+@livewireScripts
+
 <div class="min-h-screen bg-gray-100">
     <!-- Nav Bar -->
     @livewire('navigation-dropdown')
@@ -112,6 +115,5 @@
 
 @stack('modals')
 
-@livewireScripts
 </body>
 </html>
