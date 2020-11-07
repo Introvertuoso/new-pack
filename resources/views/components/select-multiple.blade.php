@@ -1,337 +1,333 @@
-{{--<div--}}
-{{--    class="m-2">--}}
-{{--    <h1 class="text-base">--}}
-{{--        {{ $title }}--}}
-{{--    </h1>--}}
+<div
+    class="m-2">
+    <h1 class="text-base">
+        {{ $title }}
+    </h1>
 
-{{--    <div>--}}
-{{--        <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>--}}
-{{--        <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js"--}}
-{{--                defer></script>--}}
+    <div>
+        <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+        <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js"
+                defer></script>
 
-{{--        <style>--}}
-{{--            [x-cloak] {--}}
-{{--                display: none;--}}
-{{--            }--}}
-{{--        </style>--}}
-{{--        <select x-cloak id="select-{{ $title }}">--}}
-{{--            @foreach($entities as $entity)--}}
-{{--                <option value="{{ $entity->id }}">{{ $entity->id }} ({{ $entity->client_name }})</option>--}}
-{{--            @endforeach--}}
-{{--        </select>--}}
-
-{{--        <div x-data="dropdown()" x-init="loadOptions('{{ $title }}')">--}}
-{{--            <form>--}}
-{{--                <input name="values" type="hidden" x-bind:value="selectedValues()">--}}
-
-{{--                <div class="inline-block relative flex flex-col w-full">--}}
-{{--                    <div class="flex flex-col items-center relative">--}}
-{{--                        <div x-on:click="open" class="w-full  svelte-1l8159u">--}}
-{{--                            <div class="mt-1 p-1 flex border border-gray-200 bg-white rounded svelte-1l8159u">--}}
-{{--                                <div class="flex flex-auto flex-wrap">--}}
-{{--                                    <template x-for="(option,index) in selected" :key="options[option].value">--}}
-{{--                                        <div--}}
-{{--                                            class="flex justify-center items-center m-1 font-medium px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">--}}
-{{--                                            <div class="text-xs font-normal leading-none max-w-full flex-initial"--}}
-{{--                                                 x-model="options[option]" x-text="options[option].text">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="flex flex-auto flex-row-reverse">--}}
-{{--                                                <div x-on:click="remove(index,option)">--}}
-{{--                                                    <svg class="fill-current h-6 w-6 " role="button"--}}
-{{--                                                         viewBox="0 0 20 20">--}}
-{{--                                                        <path d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0--}}
-{{--                                           c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183--}}
-{{--                                           l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15--}}
-{{--                                           C14.817,13.62,14.817,14.38,14.348,14.849z"/>--}}
-{{--                                                    </svg>--}}
-
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </template>--}}
-{{--                                    <div x-show="selected.length    == 0" class="flex-1">--}}
-{{--                                        <input placeholder=""--}}
-{{--                                               class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"--}}
-{{--                                               x-bind:value="selectedValues()"--}}
-{{--                                        >--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div--}}
-{{--                                    class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">--}}
-
-{{--                                    <button type="button" x-show="isOpen() === true" x-on:click="open"--}}
-{{--                                            class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">--}}
-{{--                                        <svg version="1.1" class="feather feather-chevron-up fill-current h-4 w-4"--}}
-{{--                                             viewBox="0 0 20 20">--}}
-{{--                                            <path d="M17.418,6.109c0.272-0.268,0.709-0.268,0.979,0s0.271,0.701,0,0.969l-7.908,7.83--}}
-{{--	c-0.27,0.268-0.707,0.268-0.979,0l-7.908-7.83c-0.27-0.268-0.27-0.701,0-0.969c0.271-0.268,0.709-0.268,0.979,0L10,13.25--}}
-{{--	L17.418,6.109z"/>--}}
-{{--                                        </svg>--}}
-
-{{--                                    </button>--}}
-{{--                                    <button type="button" x-show="isOpen() === false" @click="close"--}}
-{{--                                            class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">--}}
-{{--                                        <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"--}}
-{{--                                             style="transform: rotate(180deg)">--}}
-{{--                                            <path d="M2.582,13.891c-0.272,0.268-0.709,0.268-0.979,0s-0.271-0.701,0-0.969l7.908-7.83--}}
-{{--	c0.27-0.268,0.707-0.268,0.979,0l7.908,7.83c0.27,0.268,0.27,0.701,0,0.969c-0.271,0.268-0.709,0.268-0.978,0L10,6.75L2.582,13.891z--}}
-{{--	"/>--}}
-{{--                                        </svg>--}}
-
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="w-full">--}}
-{{--                            <div x-show.transition.origin.top="isOpen()"--}}
-{{--                                 class="absolute shadow top-100 bg-white z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj"--}}
-{{--                                 x-on:click.away="close">--}}
-{{--                                <div class="flex flex-col w-full">--}}
-{{--                                    <template x-for="(option,index) in options" :key="option">--}}
-{{--                                        <div>--}}
-{{--                                            <div--}}
-{{--                                                class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100"--}}
-{{--                                                @click="select(index,$event)">--}}
-{{--                                                <div x-bind:class="option.selected ? 'border-teal-600' : ''"--}}
-{{--                                                     class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">--}}
-{{--                                                    <div class="w-full items-center flex">--}}
-{{--                                                        <div class="mx-2 leading-6" x-model="option"--}}
-{{--                                                             x-text="option.text"></div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </template>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                --}}{{--            <button disabled--}}
-{{--                --}}{{--                    class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"--}}
-{{--                --}}{{--                    type="submit">--}}
-{{--                --}}{{--                Test--}}
-{{--                --}}{{--            </button>--}}
-{{--            </form>--}}
-{{--        </div>--}}
-
-
-{{--        <script>--}}
-{{--            window.livewire.on('productCreationCompleted', () => {--}}
-{{--                window.livewire.render();--}}
-{{--            })--}}
-
-{{--            function dropdown() {--}}
-{{--                return {--}}
-{{--                    id: -1,--}}
-{{--                    options: [],--}}
-{{--                    selected: [],--}}
-{{--                    show: false,--}}
-{{--                    open() {--}}
-{{--                        this.show = true--}}
-{{--                    },--}}
-{{--                    close() {--}}
-{{--                        this.show = false--}}
-{{--                    },--}}
-{{--                    isOpen() {--}}
-{{--                        return this.show === true--}}
-{{--                    },--}}
-{{--                    select(index, event) {--}}
-
-{{--                        if (!this.options[index].selected) {--}}
-{{--                            this.options[index].selected = true;--}}
-{{--                            this.options[index].element = event.target;--}}
-{{--                            this.selected.push(index);--}}
-
-{{--                        } else {--}}
-{{--                            this.selected.splice(this.selected.lastIndexOf(index), 1);--}}
-{{--                            this.options[index].selected = false--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    remove(index, option) {--}}
-{{--                        this.options[option].selected = false;--}}
-{{--                        this.selected.splice(index, 1);--}}
-{{--                    },--}}
-{{--                    loadOptions(id) {--}}
-{{--                        const options = document.getElementById('select-' + id).options;--}}
-{{--                        for (let i = 0; i < options.length; i++) {--}}
-{{--                            this.options.push({--}}
-{{--                                value: options[i].value,--}}
-{{--                                text: options[i].innerText,--}}
-{{--                                selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false--}}
-{{--                            });--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    selectedValues() {--}}
-{{--                        return this.selected.map((option) => {--}}
-{{--                            return this.options[option].value;--}}
-{{--                        })--}}
-{{--                    }--}}
-{{--                }--}}
-{{--            }--}}
-{{--        </script>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
-<div>
-    <div class="m-2 select-wrapper">
-        <h1 class="text-base">
-            {{ $title }}
-        </h1>
-        <span class="multi-select">
-    </span>
-    </div>
-
-    <script src="node_modules/select-pure/dist/bundle.min.js"></script>
-    <script>
-        const instance = new SelectPure(".multi-select", {
-            options: [
-                {
-                    label: "New York",
-                    value: "NY",
-                },
-                {
-                    label: "Washington",
-                    value: "WA",
-                },
-                {
-                    label: "California",
-                    value: "CA",
-                },
-                {
-                    label: "New Jersey",
-                    value: "NJ",
-                },
-                {
-                    label: "North Carolina",
-                    value: "NC",
-                },
-            ],
-            multiple: true,
-            // autocomplete: true,
-            // placeholder: false,
-            icon: "fa fa-times",
-            onChange: value => {
-                console.log(value);
-            },
-            classNames: {
-                select: "select-pure__select",
-                dropdownShown: "select-pure__select--opened",
-                multiselect: "select-pure__select--multiple",
-                label: "select-pure__label",
-                placeholder: "select-pure__placeholder",
-                dropdown: "select-pure__options",
-                option: "select-pure__option",
-                autocompleteInput: "select-pure__autocomplete",
-                selectedLabel: "select-pure__selected-label",
-                selectedOption: "select-pure__option--selected",
-                placeholderHidden: "select-pure__placeholder--hidden",
-                optionHidden: "select-pure__option--hidden",
+        <style>
+            [x-cloak] {
+                display: none;
             }
-        });
-    </script>
+        </style>
+        <select x-cloak id="select-{{ $title }}">
+            @foreach($entities as $entity)
+                <option value="{{ $entity->id }}">{{ $entity->id }} ({{ $entity->client_name }})</option>
+            @endforeach
+        </select>
 
-    <style>
-        .select-wrapper {
-            margin: auto;
-            max-width: 600px;
-            width: calc(100% - 40px);
-        }
+        <div x-data="dropdown()" x-init="loadOptions('{{ $title }}')">
+            <form>
+                <input name="values" type="hidden" x-bind:value="selectedValues()">
 
-        .select-pure__select {
-            align-items: center;
-            background: #f9f9f8;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            box-sizing: border-box;
-            color: #363b3e;
-            cursor: pointer;
-            display: flex;
-            font-size: 16px;
-            font-weight: 500;
-            justify-content: left;
-            min-height: 44px;
-            padding: 5px 10px;
-            position: relative;
-            transition: 0.2s;
-            width: 100%;
-        }
+                <div class="inline-block relative flex flex-col w-full">
+                    <div class="flex flex-col items-center relative">
+                        <div x-on:click="open" class="w-full  svelte-1l8159u">
+                            <div class="mt-1 p-1 flex border border-gray-200 bg-white rounded svelte-1l8159u">
+                                <div class="flex flex-auto flex-wrap">
+                                    <template x-for="(option,index) in selected" :key="options[option].value">
+                                        <div
+                                            class="flex justify-center items-center m-1 font-medium px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 ">
+                                            <div class="text-xs font-normal leading-none max-w-full flex-initial"
+                                                 x-model="options[option]" x-text="options[option].text">
+                                            </div>
+                                            <div class="flex flex-auto flex-row-reverse">
+                                                <div x-on:click="remove(index,option)">
+                                                    <svg class="fill-current h-6 w-6 " role="button"
+                                                         viewBox="0 0 20 20">
+                                                        <path d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
+                                           c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
+                                           l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
+                                           C14.817,13.62,14.817,14.38,14.348,14.849z"/>
+                                                    </svg>
 
-        .select-pure__options {
-            border-radius: 4px;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            box-sizing: border-box;
-            color: #363b3e;
-            display: none;
-            left: 0;
-            max-height: 221px;
-            overflow-y: scroll;
-            position: absolute;
-            top: 50px;
-            width: 100%;
-            z-index: 5;
-        }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div x-show="selected.length    == 0" class="flex-1">
+                                        <input placeholder=""
+                                               class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"
+                                               x-bind:value="selectedValues()"
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
 
-        .select-pure__select--opened .select-pure__options {
-            display: block;
-        }
+                                    <button type="button" x-show="isOpen() === true" x-on:click="open"
+                                            class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                                        <svg version="1.1" class="feather feather-chevron-up fill-current h-4 w-4"
+                                             viewBox="0 0 20 20">
+                                            <path d="M17.418,6.109c0.272-0.268,0.709-0.268,0.979,0s0.271,0.701,0,0.969l-7.908,7.83
+	c-0.27,0.268-0.707,0.268-0.979,0l-7.908-7.83c-0.27-0.268-0.27-0.701,0-0.969c0.271-0.268,0.709-0.268,0.979,0L10,13.25
+	L17.418,6.109z"/>
+                                        </svg>
 
-        .select-pure__option {
-            background: #fff;
-            border-bottom: 1px solid #e4e4e4;
-            box-sizing: border-box;
-            height: 44px;
-            line-height: 25px;
-            padding: 10px;
-        }
+                                    </button>
+                                    <button type="button" x-show="isOpen() === false" @click="close"
+                                            class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                                        <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"
+                                             style="transform: rotate(180deg)">
+                                            <path d="M2.582,13.891c-0.272,0.268-0.709,0.268-0.979,0s-0.271-0.701,0-0.969l7.908-7.83
+	c0.27-0.268,0.707-0.268,0.979,0l7.908,7.83c0.27,0.268,0.27,0.701,0,0.969c-0.271,0.268-0.709,0.268-0.978,0L10,6.75L2.582,13.891z
+	"/>
+                                        </svg>
 
-        .select-pure__option--selected {
-            color: #e4e4e4;
-            cursor: initial;
-            pointer-events: none;
-        }
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div x-show.transition.origin.top="isOpen()"
+                                 class="absolute shadow top-100 bg-white z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj"
+                                 x-on:click.away="close">
+                                <div class="flex flex-col w-full">
+                                    <template x-for="(option,index) in options" :key="option">
+                                        <div>
+                                            <div
+                                                class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100"
+                                                @click="select(index,$event)">
+                                                <div x-bind:class="option.selected ? 'border-teal-600' : ''"
+                                                     class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">
+                                                    <div class="w-full items-center flex">
+                                                        <div class="mx-2 leading-6" x-model="option"
+                                                             x-text="option.text"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        .select-pure__option--hidden {
-            display: none;
-        }
+{{--                            <button disabled--}}
+{{--                                    class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"--}}
+{{--                                    type="submit">--}}
+{{--                                Test--}}
+{{--                            </button>--}}
+            </form>
+        </div>
 
-        .select-pure__selected-label {
-            background: #5e6264;
-            border-radius: 4px;
-            color: #fff;
-            cursor: initial;
-            display: inline-block;
-            margin: 5px 10px 5px 0;
-            padding: 3px 7px;
-        }
+        <script>
+            function dropdown() {
+                return {
+                    options: [],
+                    selected: [],
+                    show: false,
+                    open() {
+                        this.show = true
+                    },
+                    close() {
+                        this.show = false
+                    },
+                    isOpen() {
+                        return this.show === true
+                    },
+                    select(index, event) {
+                        if (!this.options[index].selected) {
+                            this.options[index].selected = true;
+                            this.options[index].element = event.target;
+                            this.selected.push(index);
 
-        .select-pure__selected-label:last-of-type {
-            margin-right: 0;
-        }
+                        } else {
+                            this.selected.splice(this.selected.lastIndexOf(index), 1);
+                            this.options[index].selected = false
+                        }
+                    },
+                    remove(index, option) {
+                        this.options[option].selected = false;
+                        this.selected.splice(index, 1);
+                    },
+                    loadOptions(id) {
+                        const select = document.getElementById('select-' + id)
+                        const options = select.options;
+                        for (let i = 0; i < options.length; i++) {
+                            this.options.push({
+                                value: options[i].value,
+                                text: options[i].innerText,
+                                selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
+                            });
+                        }
 
-        .select-pure__selected-label i {
-            cursor: pointer;
-            display: inline-block;
-            margin-left: 7px;
-        }
-
-        .select-pure__selected-label i:hover {
-            color: #e4e4e4;
-        }
-
-        .select-pure__autocomplete {
-            background: #f9f9f8;
-            border-bottom: 1px solid #e4e4e4;
-            border-left: none;
-            border-right: none;
-            border-top: none;
-            box-sizing: border-box;
-            font-size: 16px;
-            outline: none;
-            padding: 10px;
-            width: 100%;
-        }
-    </style>
+                        {{ $onSourceModified }}
+                    },
+                    selectedValues() {
+                        return this.selected.map((option) => {
+                            return this.options[option].value;
+                        })
+                    }
+                }
+            }
+        </script>
+    </div>
 </div>
+
+{{--<div>--}}
+{{--    <div class="m-2 select-wrapper">--}}
+{{--        <h1 class="text-base">--}}
+{{--            {{ $title }}--}}
+{{--        </h1>--}}
+{{--        <span class="multi-select">--}}
+{{--    </span>--}}
+{{--    </div>--}}
+
+{{--    <script src="node_modules/select-pure/dist/bundle.min.js"></script>--}}
+{{--    <script>--}}
+{{--        const instance = new SelectPure(".multi-select", {--}}
+{{--            options: [--}}
+{{--                {--}}
+{{--                    label: "New York",--}}
+{{--                    value: "NY",--}}
+{{--                },--}}
+{{--                {--}}
+{{--                    label: "Washington",--}}
+{{--                    value: "WA",--}}
+{{--                },--}}
+{{--                {--}}
+{{--                    label: "California",--}}
+{{--                    value: "CA",--}}
+{{--                },--}}
+{{--                {--}}
+{{--                    label: "New Jersey",--}}
+{{--                    value: "NJ",--}}
+{{--                },--}}
+{{--                {--}}
+{{--                    label: "North Carolina",--}}
+{{--                    value: "NC",--}}
+{{--                },--}}
+{{--            ],--}}
+{{--            multiple: true,--}}
+{{--            // autocomplete: true,--}}
+{{--            // placeholder: false,--}}
+{{--            icon: "fa fa-times",--}}
+{{--            onChange: value => {--}}
+{{--                console.log(value);--}}
+{{--            },--}}
+{{--            classNames: {--}}
+{{--                select: "select-pure__select",--}}
+{{--                dropdownShown: "select-pure__select--opened",--}}
+{{--                multiselect: "select-pure__select--multiple",--}}
+{{--                label: "select-pure__label",--}}
+{{--                placeholder: "select-pure__placeholder",--}}
+{{--                dropdown: "select-pure__options",--}}
+{{--                option: "select-pure__option",--}}
+{{--                autocompleteInput: "select-pure__autocomplete",--}}
+{{--                selectedLabel: "select-pure__selected-label",--}}
+{{--                selectedOption: "select-pure__option--selected",--}}
+{{--                placeholderHidden: "select-pure__placeholder--hidden",--}}
+{{--                optionHidden: "select-pure__option--hidden",--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
+
+{{--    <style>--}}
+{{--        .select-wrapper {--}}
+{{--            margin: auto;--}}
+{{--            max-width: 600px;--}}
+{{--            width: calc(100% - 40px);--}}
+{{--        }--}}
+
+{{--        .select-pure__select {--}}
+{{--            align-items: center;--}}
+{{--            background: #f9f9f8;--}}
+{{--            border-radius: 4px;--}}
+{{--            border: 1px solid rgba(0, 0, 0, 0.15);--}}
+{{--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);--}}
+{{--            box-sizing: border-box;--}}
+{{--            color: #363b3e;--}}
+{{--            cursor: pointer;--}}
+{{--            display: flex;--}}
+{{--            font-size: 16px;--}}
+{{--            font-weight: 500;--}}
+{{--            justify-content: left;--}}
+{{--            min-height: 44px;--}}
+{{--            padding: 5px 10px;--}}
+{{--            position: relative;--}}
+{{--            transition: 0.2s;--}}
+{{--            width: 100%;--}}
+{{--        }--}}
+
+{{--        .select-pure__options {--}}
+{{--            border-radius: 4px;--}}
+{{--            border: 1px solid rgba(0, 0, 0, 0.15);--}}
+{{--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);--}}
+{{--            box-sizing: border-box;--}}
+{{--            color: #363b3e;--}}
+{{--            display: none;--}}
+{{--            left: 0;--}}
+{{--            max-height: 221px;--}}
+{{--            overflow-y: scroll;--}}
+{{--            position: absolute;--}}
+{{--            top: 50px;--}}
+{{--            width: 100%;--}}
+{{--            z-index: 5;--}}
+{{--        }--}}
+
+{{--        .select-pure__select--opened .select-pure__options {--}}
+{{--            display: block;--}}
+{{--        }--}}
+
+{{--        .select-pure__option {--}}
+{{--            background: #fff;--}}
+{{--            border-bottom: 1px solid #e4e4e4;--}}
+{{--            box-sizing: border-box;--}}
+{{--            height: 44px;--}}
+{{--            line-height: 25px;--}}
+{{--            padding: 10px;--}}
+{{--        }--}}
+
+{{--        .select-pure__option--selected {--}}
+{{--            color: #e4e4e4;--}}
+{{--            cursor: initial;--}}
+{{--            pointer-events: none;--}}
+{{--        }--}}
+
+{{--        .select-pure__option--hidden {--}}
+{{--            display: none;--}}
+{{--        }--}}
+
+{{--        .select-pure__selected-label {--}}
+{{--            background: #5e6264;--}}
+{{--            border-radius: 4px;--}}
+{{--            color: #fff;--}}
+{{--            cursor: initial;--}}
+{{--            display: inline-block;--}}
+{{--            margin: 5px 10px 5px 0;--}}
+{{--            padding: 3px 7px;--}}
+{{--        }--}}
+
+{{--        .select-pure__selected-label:last-of-type {--}}
+{{--            margin-right: 0;--}}
+{{--        }--}}
+
+{{--        .select-pure__selected-label i {--}}
+{{--            cursor: pointer;--}}
+{{--            display: inline-block;--}}
+{{--            margin-left: 7px;--}}
+{{--        }--}}
+
+{{--        .select-pure__selected-label i:hover {--}}
+{{--            color: #e4e4e4;--}}
+{{--        }--}}
+
+{{--        .select-pure__autocomplete {--}}
+{{--            background: #f9f9f8;--}}
+{{--            border-bottom: 1px solid #e4e4e4;--}}
+{{--            border-left: none;--}}
+{{--            border-right: none;--}}
+{{--            border-top: none;--}}
+{{--            box-sizing: border-box;--}}
+{{--            font-size: 16px;--}}
+{{--            outline: none;--}}
+{{--            padding: 10px;--}}
+{{--            width: 100%;--}}
+{{--        }--}}
+{{--    </style>--}}
+{{--</div>--}}

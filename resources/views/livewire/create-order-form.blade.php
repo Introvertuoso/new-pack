@@ -48,6 +48,9 @@
                             @slot('title')
                                 {{ __('Client') }}
                             @endslot
+                            @slot('func')
+                                {{ __('pickClient') }}
+                            @endslot
                             @slot('value')
                                 {{ __('clientName') }}
                             @endslot
@@ -122,13 +125,9 @@
                             @slot('title')
                                 {{ __('Flexographic') }}
                             @endslot
-{{--                            @slot('listener')--}}
-{{--                                {{--}}
-{{--                                    __("window.livewire.on('productCreationCompleted', () => {--}}
-{{--                                        loadOptions();--}}
-{{--                                    })")--}}
-{{--                                }}--}}
-{{--                            @endslot--}}
+                            @slot('onSourceModified')
+                                @include('scripts.product-source-changed-script')
+                            @endslot
                         @endcomponent
 
                         <div class="p-3">
@@ -139,13 +138,9 @@
                             @slot('title')
                                 {{ __('Offset') }}
                             @endslot
-{{--                            @slot('listener')--}}
-{{--                                {{--}}
-{{--                                    __("window.livewire.on('productCreationCompleted', () => {--}}
-{{--                                        loadOptions();--}}
-{{--                                    });")--}}
-{{--                                }}--}}
-{{--                            @endslot--}}
+                            @slot('onSourceModified')
+                                @include('scripts.product-source-changed-script')
+                            @endslot
                         @endcomponent
                     </div>
                 </div>

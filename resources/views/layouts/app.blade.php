@@ -95,6 +95,7 @@
 <body class="font-sans antialiased">
 
 @livewireScripts
+{{--<script src="{{ asset('js/custom.js') }}" defer></script>--}}
 
 <div class="min-h-screen bg-gray-100">
     <!-- Nav Bar -->

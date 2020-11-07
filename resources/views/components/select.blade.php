@@ -69,7 +69,7 @@
                             <div
                                 onclick="toggleList('{{ $title }}')"
                                 class="flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
-                                wire:click="pickClient({{ $entity->id }})"
+                                wire:click="{{ $func }}({{ $entity->id }})"
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
                                     <div class="mx-2 leading-6">

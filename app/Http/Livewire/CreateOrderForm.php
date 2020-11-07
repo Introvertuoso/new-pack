@@ -27,10 +27,10 @@ class CreateOrderForm extends Component
 
     public $listeners = [
         'clientCreationCompleted' => 'refresh',
+        'productCreationCompleted' => 'refresh'
     ];
 
     public function refresh() {
-        // TODO: This does nothing but is def cool
     }
 
     public function confirmOrderCreation()

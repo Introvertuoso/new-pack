@@ -36,26 +36,35 @@ class CreateProductForm extends Component
 
     public function createProduct()
     {
+        $flexographic =                  null;
+        $offset =                        null;
+
         $product = new Product();
-        $product->client_name = $this->clientName;
-        $product->amount = $this->amount;
-        $product->type = $this->type;
+        $product->client_name =          $this->clientName;
+        $product->amount =               $this->amount;
+        $product->type =                 $this->type;
         $product->save();
 
         if ($this->type == 'flexographic') {
-            $flexographic = new Flexographic();
-            $flexographic->product_id = $product->id;
+            $flexographic =              new Flexographic();
+            $flexographic->product_id =  $product->id;
+
             // TODO: Here goes the corresponding attributes
+
             $flexographic->save();
         }
         else if ($this->type == 'offset') {
-            $offset = new Offset();
-            $offset->product_id = $product->id;
+            $offset =                    new Offset();
+            $offset->product_id =        $product->id;
             // TODO: Here goes the corresponding attributes
             $offset->save();
         }
 
-        $this->emit('productCreationCompleted');
+        $this->emit('productCreationCompleted', [
+            'product' =>                $product,
+            'flexographic' =>           $flexographic,
+            'offset' =>                 $offset
+        ]);
         $this->dispatchBrowserEvent('productCreationCompleted');
     }
 
