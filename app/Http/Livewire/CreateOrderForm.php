@@ -5,10 +5,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
+use function DeepCopy\deep_copy;
 
 
 class CreateOrderForm extends Component
@@ -24,10 +26,11 @@ class CreateOrderForm extends Component
     public $clientName = '';
     public $user;
     public $userName = '';
+    public $products;
 
     public $listeners = [
-        'clientCreationCompleted' => 'refresh',
-        'productCreationCompleted' => 'refresh'
+        'productPicked' => 'pickProduct',
+        'productUnpicked' => 'unpickProduct'
     ];
 
     public function refresh() {
@@ -39,11 +42,12 @@ class CreateOrderForm extends Component
         $this->approved = 0;
         $this->totalPreDiscount = 0;
         $this->discount = 0.0;
-        $this->total =  0;
+        $this->total = 0;
         $this->client = null;
         $this->clientName = '';
         $this->user = auth()->user();
         $this->userName = $this->user->name;
+//        $this->products = '';
 
 //        $this->dispatchBrowserEvent('confirming-create-client');
     }
@@ -53,6 +57,17 @@ class CreateOrderForm extends Component
         $this->client = $client;
         $this->query = $client->name;
         $this->clientName = $client->name;
+    }
+
+    public function pickProduct($key) {
+        $product = Product::where('id', $key)->first();
+        $this->products = $this->products . ' ' . $key;
+        dump($this->products);
+    }
+
+    public function unpickProduct($key) {
+        var_dump($this->products);
+        unset($this->products[$key]);
     }
 
     public function createOrder() {

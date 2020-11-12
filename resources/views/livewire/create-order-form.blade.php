@@ -121,9 +121,17 @@
                         @livewire('create-product-form')
 
                         @component('components.select-multiple',
-                                ['entities' => \App\Models\Product::where('type', 'flexographic')->get()])
+                                [
+                                    'entities' => \App\Models\Product::where('type', 'flexographic')->get(),
+                                ])
                             @slot('title')
                                 {{ __('Flexographic') }}
+                            @endslot
+                            @slot('selectEvent')
+                                {{ __('productPicked') }}
+                            @endslot
+                            @slot('removeEvent')
+                                {{ __('productUnpicked') }}
                             @endslot
                             @slot('onSourceModified')
                                 @include('scripts.product-source-changed-script')
@@ -133,10 +141,17 @@
                         <div class="p-3">
                         </div>
 
-                        @component('components.select-multiple',
-                                ['entities' => \App\Models\Product::where('type', 'offset')->get()])
+                        @component('components.select-multiple',[
+                            'entities' => \App\Models\Product::where('type', 'offset')->get(),
+                            ])
                             @slot('title')
                                 {{ __('Offset') }}
+                            @endslot
+                            @slot('selectEvent')
+                                {{ __('productPicked') }}
+                            @endslot
+                            @slot('removeEvent')
+                                {{ __('productUnpicked') }}
                             @endslot
                             @slot('onSourceModified')
                                 @include('scripts.product-source-changed-script')

@@ -36,7 +36,7 @@
                                                  x-model="options[option]" x-text="options[option].text">
                                             </div>
                                             <div class="flex flex-auto flex-row-reverse">
-                                                <div x-on:click="remove(index,option)">
+                                                <div x-on:click="remove(index, option)">
                                                     <svg class="fill-current h-6 w-6 " role="button"
                                                          viewBox="0 0 20 20">
                                                         <path d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
@@ -91,12 +91,13 @@
                                         <div>
                                             <div
                                                 class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100"
-                                                @click="select(index,$event)">
+                                                @click="select(index, $event)">
                                                 <div x-bind:class="option.selected ? 'border-teal-600' : ''"
                                                      class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">
                                                     <div class="w-full items-center flex">
                                                         <div class="mx-2 leading-6" x-model="option"
-                                                             x-text="option.text"></div>
+                                                             x-text="option.text">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,6 +113,7 @@
 {{--                                    type="submit">--}}
 {{--                                Test--}}
 {{--                            </button>--}}
+                </div>
             </form>
         </div>
 
@@ -136,14 +138,19 @@
                             this.options[index].element = event.target;
                             this.selected.push(index);
 
+                            Livewire.emit('{{ $selectEvent }}', this.options[index].value)
                         } else {
                             this.selected.splice(this.selected.lastIndexOf(index), 1);
-                            this.options[index].selected = false
+                            this.options[index].selected = false;
+
+                            Livewire.emit('{{ $removeEvent }}', this.options[index].value);
                         }
                     },
                     remove(index, option) {
                         this.options[option].selected = false;
                         this.selected.splice(index, 1);
+
+                        Livewire.emit('{{ $removeEvent }}', this.options[index].value)
                     },
                     loadOptions(id) {
                         const select = document.getElementById('select-' + id)
@@ -168,166 +175,3 @@
         </script>
     </div>
 </div>
-
-{{--<div>--}}
-{{--    <div class="m-2 select-wrapper">--}}
-{{--        <h1 class="text-base">--}}
-{{--            {{ $title }}--}}
-{{--        </h1>--}}
-{{--        <span class="multi-select">--}}
-{{--    </span>--}}
-{{--    </div>--}}
-
-{{--    <script src="node_modules/select-pure/dist/bundle.min.js"></script>--}}
-{{--    <script>--}}
-{{--        const instance = new SelectPure(".multi-select", {--}}
-{{--            options: [--}}
-{{--                {--}}
-{{--                    label: "New York",--}}
-{{--                    value: "NY",--}}
-{{--                },--}}
-{{--                {--}}
-{{--                    label: "Washington",--}}
-{{--                    value: "WA",--}}
-{{--                },--}}
-{{--                {--}}
-{{--                    label: "California",--}}
-{{--                    value: "CA",--}}
-{{--                },--}}
-{{--                {--}}
-{{--                    label: "New Jersey",--}}
-{{--                    value: "NJ",--}}
-{{--                },--}}
-{{--                {--}}
-{{--                    label: "North Carolina",--}}
-{{--                    value: "NC",--}}
-{{--                },--}}
-{{--            ],--}}
-{{--            multiple: true,--}}
-{{--            // autocomplete: true,--}}
-{{--            // placeholder: false,--}}
-{{--            icon: "fa fa-times",--}}
-{{--            onChange: value => {--}}
-{{--                console.log(value);--}}
-{{--            },--}}
-{{--            classNames: {--}}
-{{--                select: "select-pure__select",--}}
-{{--                dropdownShown: "select-pure__select--opened",--}}
-{{--                multiselect: "select-pure__select--multiple",--}}
-{{--                label: "select-pure__label",--}}
-{{--                placeholder: "select-pure__placeholder",--}}
-{{--                dropdown: "select-pure__options",--}}
-{{--                option: "select-pure__option",--}}
-{{--                autocompleteInput: "select-pure__autocomplete",--}}
-{{--                selectedLabel: "select-pure__selected-label",--}}
-{{--                selectedOption: "select-pure__option--selected",--}}
-{{--                placeholderHidden: "select-pure__placeholder--hidden",--}}
-{{--                optionHidden: "select-pure__option--hidden",--}}
-{{--            }--}}
-{{--        });--}}
-{{--    </script>--}}
-
-{{--    <style>--}}
-{{--        .select-wrapper {--}}
-{{--            margin: auto;--}}
-{{--            max-width: 600px;--}}
-{{--            width: calc(100% - 40px);--}}
-{{--        }--}}
-
-{{--        .select-pure__select {--}}
-{{--            align-items: center;--}}
-{{--            background: #f9f9f8;--}}
-{{--            border-radius: 4px;--}}
-{{--            border: 1px solid rgba(0, 0, 0, 0.15);--}}
-{{--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);--}}
-{{--            box-sizing: border-box;--}}
-{{--            color: #363b3e;--}}
-{{--            cursor: pointer;--}}
-{{--            display: flex;--}}
-{{--            font-size: 16px;--}}
-{{--            font-weight: 500;--}}
-{{--            justify-content: left;--}}
-{{--            min-height: 44px;--}}
-{{--            padding: 5px 10px;--}}
-{{--            position: relative;--}}
-{{--            transition: 0.2s;--}}
-{{--            width: 100%;--}}
-{{--        }--}}
-
-{{--        .select-pure__options {--}}
-{{--            border-radius: 4px;--}}
-{{--            border: 1px solid rgba(0, 0, 0, 0.15);--}}
-{{--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);--}}
-{{--            box-sizing: border-box;--}}
-{{--            color: #363b3e;--}}
-{{--            display: none;--}}
-{{--            left: 0;--}}
-{{--            max-height: 221px;--}}
-{{--            overflow-y: scroll;--}}
-{{--            position: absolute;--}}
-{{--            top: 50px;--}}
-{{--            width: 100%;--}}
-{{--            z-index: 5;--}}
-{{--        }--}}
-
-{{--        .select-pure__select--opened .select-pure__options {--}}
-{{--            display: block;--}}
-{{--        }--}}
-
-{{--        .select-pure__option {--}}
-{{--            background: #fff;--}}
-{{--            border-bottom: 1px solid #e4e4e4;--}}
-{{--            box-sizing: border-box;--}}
-{{--            height: 44px;--}}
-{{--            line-height: 25px;--}}
-{{--            padding: 10px;--}}
-{{--        }--}}
-
-{{--        .select-pure__option--selected {--}}
-{{--            color: #e4e4e4;--}}
-{{--            cursor: initial;--}}
-{{--            pointer-events: none;--}}
-{{--        }--}}
-
-{{--        .select-pure__option--hidden {--}}
-{{--            display: none;--}}
-{{--        }--}}
-
-{{--        .select-pure__selected-label {--}}
-{{--            background: #5e6264;--}}
-{{--            border-radius: 4px;--}}
-{{--            color: #fff;--}}
-{{--            cursor: initial;--}}
-{{--            display: inline-block;--}}
-{{--            margin: 5px 10px 5px 0;--}}
-{{--            padding: 3px 7px;--}}
-{{--        }--}}
-
-{{--        .select-pure__selected-label:last-of-type {--}}
-{{--            margin-right: 0;--}}
-{{--        }--}}
-
-{{--        .select-pure__selected-label i {--}}
-{{--            cursor: pointer;--}}
-{{--            display: inline-block;--}}
-{{--            margin-left: 7px;--}}
-{{--        }--}}
-
-{{--        .select-pure__selected-label i:hover {--}}
-{{--            color: #e4e4e4;--}}
-{{--        }--}}
-
-{{--        .select-pure__autocomplete {--}}
-{{--            background: #f9f9f8;--}}
-{{--            border-bottom: 1px solid #e4e4e4;--}}
-{{--            border-left: none;--}}
-{{--            border-right: none;--}}
-{{--            border-top: none;--}}
-{{--            box-sizing: border-box;--}}
-{{--            font-size: 16px;--}}
-{{--            outline: none;--}}
-{{--            padding: 10px;--}}
-{{--            width: 100%;--}}
-{{--        }--}}
-{{--    </style>--}}
-{{--</div>--}}
