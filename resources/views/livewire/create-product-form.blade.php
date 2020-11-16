@@ -11,6 +11,10 @@
     </x-jet-button>
 
     <x-modal>
+        <x-slot name="modalClosedEvent">
+            {{ __('productModalClosed') }}
+        </x-slot>
+
         <x-slot name="title">
             {{ __('Add Product') }}
         </x-slot>

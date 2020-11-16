@@ -17,6 +17,10 @@
     </x-jet-button>
 
     <x-modal wire:model="confirmingOrderCreation">
+        <x-slot name="modalClosedEvent">
+            {{ __('orderModalClosed') }}
+        </x-slot>
+
         <x-slot name="title">
             {{ __('Add Order') }}
         </x-slot>
@@ -133,6 +137,9 @@
                             @slot('removeEvent')
                                 {{ __('productUnpicked') }}
                             @endslot
+                            @slot('parentClosedEvent')
+                                {{ __('orderModalClosed') }}
+                            @endslot
                             @slot('onSourceModified')
                                 @include('scripts.product-source-changed-script')
                             @endslot
@@ -152,6 +159,9 @@
                             @endslot
                             @slot('removeEvent')
                                 {{ __('productUnpicked') }}
+                            @endslot
+                            @slot('parentClosedEvent')
+                                {{ __('orderModalClosed') }}
                             @endslot
                             @slot('onSourceModified')
                                 @include('scripts.product-source-changed-script')

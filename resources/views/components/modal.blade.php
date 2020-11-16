@@ -92,6 +92,8 @@
             modal.classList.toggle('opacity-0')
             modal.classList.toggle('pointer-events-none')
             // body.classList.toggle('popup-active')
+
+            Livewire.emit('{{ $modalClosedEvent }}');
         }
     </script>
 </div>

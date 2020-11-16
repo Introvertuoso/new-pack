@@ -47,7 +47,7 @@ class CreateOrderForm extends Component
         $this->clientName = '';
         $this->user = auth()->user();
         $this->userName = $this->user->name;
-//        $this->products = '';
+        $this->products = [];
 
 //        $this->dispatchBrowserEvent('confirming-create-client');
     }
@@ -61,24 +61,22 @@ class CreateOrderForm extends Component
 
     public function pickProduct($key) {
         $product = Product::where('id', $key)->first();
-        $this->products = $this->products . ' ' . $key;
-        dump($this->products);
+        $this->products[$key] = $product;
     }
 
     public function unpickProduct($key) {
-        var_dump($this->products);
         unset($this->products[$key]);
     }
 
     public function createOrder() {
-        // TODO: Do this for all:
-        // TODO: Required field trick from course on the front-end as well as on the back-end
-        $order = new Order();
-        $order->approved = $this->approved;
-        $order->total = $this->total;
-        $order->client_id = $this->client->id;
-        $order->user_id = $this->user->id;
-        $order->save();
+//        // TODO: Do this for all:
+//        // TODO: Required field trick from course on the front-end as well as on the back-end
+//        $order = new Order();
+//        $order->approved = $this->approved;
+//        $order->total = $this->total;
+//        $order->client_id = $this->client->id;
+//        $order->user_id = $this->user->id;
+//        $order->save();
         $this->emit('orderCreationCompleted');
     }
 

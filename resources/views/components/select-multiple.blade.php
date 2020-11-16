@@ -16,7 +16,7 @@
         </style>
         <select x-cloak id="select-{{ $title }}">
             @foreach($entities as $entity)
-                <option value="{{ $entity->id }}">{{ $entity->id }} ({{ $entity->client_name }})</option>
+                <option value="{{ $entity->id }}">{{ $entity->id }}</option>
             @endforeach
         </select>
 
@@ -26,7 +26,7 @@
 
                 <div class="inline-block relative flex flex-col w-full">
                     <div class="flex flex-col items-center relative">
-                        <div x-on:click="open" class="w-full  svelte-1l8159u">
+                        <div @click="open" class="w-full  svelte-1l8159u">
                             <div class="mt-1 p-1 flex border border-gray-200 bg-white rounded svelte-1l8159u">
                                 <div class="flex flex-auto flex-wrap">
                                     <template x-for="(option,index) in selected" :key="options[option].value">
@@ -59,7 +59,7 @@
                                 <div
                                     class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
 
-                                    <button type="button" x-show="isOpen() === true" x-on:click="open"
+                                    <button type="button" x-show="isOpen() === true" @click="open"
                                             class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
                                         <svg version="1.1" class="feather feather-chevron-up fill-current h-4 w-4"
                                              viewBox="0 0 20 20">
@@ -164,14 +164,63 @@
                         }
 
                         {{ $onSourceModified }}
+                        window.livewire.on('{{ $parentClosedEvent }}', () => {
+                            this.clear()
+                        })
                     },
                     selectedValues() {
                         return this.selected.map((option) => {
                             return this.options[option].value;
                         })
+                    },
+                    clear() {
+                        if (this.selected.length > 0) {
+                            let temp = this.selected;
+                            for (let i = 0; i < temp.length; i++) {
+                                this.options[temp[i]].selected = false;
+                                this.selected.splice(temp[i], 1);
+                            }
+                        }
                     }
                 }
             }
         </script>
     </div>
 </div>
+
+
+
+{{--<div class="m-2">--}}
+{{--    <h1 class="text-base">--}}
+{{--        {{ $title }}--}}
+{{--    </h1>--}}
+
+{{--    <select class="form-control" id="choices-multiple-remove-button" multiple>--}}
+{{--        @foreach($entities as $entity)--}}
+{{--            TODO: This mustn't be hardcoded (client_name)--}}
+{{--            <option wire:click="{{ $selectFunc }}({{ $entity->id }})" value="{{ $entity->id }}">{{ $entity->id }} {{ $entity->client_name }}</option>--}}
+{{--        @endforeach--}}
+{{--    </select>--}}
+
+{{--    <script>--}}
+{{--        import Choices from "choices.js";--}}
+
+{{--        document.addEventListener('DOMContentLoaded', function() {--}}
+{{--            let genericExamples = document.querySelectorAll('[data-trigger]');--}}
+{{--            for (let i = 0; i < genericExamples.length; ++i) {--}}
+{{--                let element = genericExamples[i];--}}
+{{--                new Choices(element, {--}}
+{{--                    placeholderValue: 'This is a placeholder set in the config',--}}
+{{--                    searchPlaceholderValue: 'This is a search placeholder',--}}
+{{--                });--}}
+{{--            }--}}
+{{--        });--}}
+
+{{--        let multipleCancelButton = new Choices(--}}
+{{--            '#choices-multiple-remove-button',--}}
+{{--            {--}}
+{{--                removeItemButton: true,--}}
+{{--            }--}}
+{{--        );--}}
+{{--    </script>--}}
+{{--</div>--}}

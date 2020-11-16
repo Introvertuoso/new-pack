@@ -10,6 +10,10 @@
     </x-jet-button>
 
     <x-modal>
+        <x-slot name="modalClosedEvent">
+            {{ __('clientModalClosed') }}
+        </x-slot>
+
         <x-slot name="title">
             {{ __('Add Client') }}
         </x-slot>
