@@ -18,13 +18,13 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
 
-    <!-- Choices.js -->
-    <!-- Include Choices CSS -->
+{{--    <!-- Choices.js -->--}}
+{{--    <!-- Include Choices CSS -->--}}
 {{--    <link--}}
 {{--        rel="stylesheet"--}}
 {{--        href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"--}}
 {{--    />--}}
-    <!-- Include Choices JavaScript (latest) -->
+{{--    <!-- Include Choices JavaScript (latest) -->--}}
 {{--    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>--}}
 
 

@@ -1,12 +1,14 @@
 <div x-data=
      "{
-        userName:           @entangle('userName').defer
-        client:             @entangle('client').defer
-        approved:           @entangle('approved').defer
-        totalPreDiscount:   @entangle('totalPreDiscount').defer
-        discount:           @entangle('discount').defer
-        total:              @entangle('total').defer
-        query:              @entangle('query').defer
+        userName:                           @entangle('userName').defer
+        client:                             @entangle('client').defer
+        approved:                           @entangle('approved').defer
+        totalPreDiscount:                   @entangle('totalPreDiscount').defer
+        discount:                           @entangle('discount').defer
+        total:                              @entangle('total').defer
+        query:                              @entangle('query').defer
+        flexographicSelectMultiple:         @entangle('flexographicSelectMultiple').defer
+        offsetSelectMultiple:               @entangle('offsetSelectMultiple').defer
      }"
      x-init="
      "
@@ -119,54 +121,9 @@
                         </x-input>
                     </div>
                     <div class="pl-6">
-                        <h1 class="text-lg">
-                            Products:
-                        </h1>
-                        @livewire('create-product-form')
 
-                        @component('components.select-multiple',
-                                [
-                                    'entities' => \App\Models\Product::where('type', 'flexographic')->get(),
-                                ])
-                            @slot('title')
-                                {{ __('Flexographic') }}
-                            @endslot
-                            @slot('selectEvent')
-                                {{ __('productPicked') }}
-                            @endslot
-                            @slot('removeEvent')
-                                {{ __('productUnpicked') }}
-                            @endslot
-                            @slot('parentClosedEvent')
-                                {{ __('orderModalClosed') }}
-                            @endslot
-                            @slot('onSourceModified')
-                                @include('scripts.product-source-changed-script')
-                            @endslot
-                        @endcomponent
+                        @livewire('select-multiple-products-form')
 
-                        <div class="p-3">
-                        </div>
-
-                        @component('components.select-multiple',[
-                            'entities' => \App\Models\Product::where('type', 'offset')->get(),
-                            ])
-                            @slot('title')
-                                {{ __('Offset') }}
-                            @endslot
-                            @slot('selectEvent')
-                                {{ __('productPicked') }}
-                            @endslot
-                            @slot('removeEvent')
-                                {{ __('productUnpicked') }}
-                            @endslot
-                            @slot('parentClosedEvent')
-                                {{ __('orderModalClosed') }}
-                            @endslot
-                            @slot('onSourceModified')
-                                @include('scripts.product-source-changed-script')
-                            @endslot
-                        @endcomponent
                     </div>
                 </div>
             </div>

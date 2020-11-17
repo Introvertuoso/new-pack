@@ -164,9 +164,9 @@
                         }
 
                         {{ $onSourceModified }}
-                        window.livewire.on('{{ $parentClosedEvent }}', () => {
-                            this.clear()
-                        })
+                        {{--window.livewire.on('{{ $parentClosedEvent }}', () => {--}}
+                        {{--    this.clear()--}}
+                        {{--})--}}
                     },
                     selectedValues() {
                         return this.selected.map((option) => {
@@ -198,29 +198,22 @@
 {{--    <select class="form-control" id="choices-multiple-remove-button" multiple>--}}
 {{--        @foreach($entities as $entity)--}}
 {{--            TODO: This mustn't be hardcoded (client_name)--}}
-{{--            <option wire:click="{{ $selectFunc }}({{ $entity->id }})" value="{{ $entity->id }}">{{ $entity->id }} {{ $entity->client_name }}</option>--}}
+{{--            <option wire:click="pickProduct({{ $entity->id }})" value="{{ $entity->id }}">{{ $entity->id }} {{ $entity->client_name }}</option>--}}
 {{--        @endforeach--}}
 {{--    </select>--}}
+{{--</div>--}}
 
-{{--    <script>--}}
-{{--        import Choices from "choices.js";--}}
-
-{{--        document.addEventListener('DOMContentLoaded', function() {--}}
-{{--            let genericExamples = document.querySelectorAll('[data-trigger]');--}}
-{{--            for (let i = 0; i < genericExamples.length; ++i) {--}}
-{{--                let element = genericExamples[i];--}}
-{{--                new Choices(element, {--}}
-{{--                    placeholderValue: 'This is a placeholder set in the config',--}}
-{{--                    searchPlaceholderValue: 'This is a search placeholder',--}}
-{{--                });--}}
-{{--            }--}}
-{{--        });--}}
-
+{{--<script type="module">--}}
+{{--    document.addEventListener('DOMContentLoaded', function() {--}}
 {{--        let multipleCancelButton = new Choices(--}}
-{{--            '#choices-multiple-remove-button',--}}
+{{--            document.getElementById('choices-multiple-remove-button'),--}}
 {{--            {--}}
 {{--                removeItemButton: true,--}}
 {{--            }--}}
 {{--        );--}}
-{{--    </script>--}}
-{{--</div>--}}
+
+{{--        window.livewire.on('{{ $parentClosedEvent }}', () => {--}}
+{{--            multipleCancelButton.clearChoices();--}}
+{{--        });--}}
+{{--    });--}}
+{{--</script>--}}
