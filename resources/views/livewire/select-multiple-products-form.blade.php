@@ -13,8 +13,24 @@
 
     @livewire('create-product-form')
 
+    <div class="p-2">
+    </div>
+
     {!! $flexographicSelectMultiple !!}
+
+    <div class="p-2">
+    </div>
+    <hr>
+
     {!! $offsetSelectMultiple !!}
+
+    <div class="p-2">
+    </div>
+    <hr>
+
+    <button class="flex w-full bg-indigo-600" wire:click="done">
+        Done
+    </button>
 
 {{--    @component('components.select', ['entities' => \App\Models\Client::all()])--}}
 {{--        @slot('title')--}}

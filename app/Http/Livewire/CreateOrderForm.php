@@ -31,7 +31,12 @@ class CreateOrderForm extends Component
     public $listeners = [
         'productPicked' => 'pickProduct',
         'productUnpicked' => 'unpickProduct',
+        'productsChosen' => 'receiveProducts',
     ];
+
+    public function receiveProducts($products) {
+        $this->products = $products;
+    }
 
     public function confirmOrderCreation()
     {
@@ -66,18 +71,20 @@ class CreateOrderForm extends Component
     }
 
     public function createOrder() {
-        // TODO: Do this for all:
-        // TODO: Required field trick from course on the front-end as well as on the back-end
-        $order = new Order();
-        $order->approved = $this->approved;
-        $order->total = $this->total;
-        $order->client_id = $this->client->id;
-        $order->user_id = $this->user->id;
-        $order->save();
+//        // TODO: Do this for all:
+//        // TODO: Required field trick from course on the front-end as well as on the back-end
+//        $order = new Order();
+//        $order->approved = $this->approved;
+//        $order->total = $this->total;
+//        $order->client_id = $this->client->id;
+//        $order->user_id = $this->user->id;
+//        $order->save();
+//
+//
+//
+//        $this->emit('orderCreationCompleted');
 
-
-
-        $this->emit('orderCreationCompleted');
+        dump($this->products);
     }
 
     public function render() {
