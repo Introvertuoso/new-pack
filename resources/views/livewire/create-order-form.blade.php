@@ -1,5 +1,6 @@
-<div x-data=
-     "{
+<div
+    x-data=
+    "{
         userName:                           @entangle('userName').defer
         client:                             @entangle('client').defer
         approved:                           @entangle('approved').defer
@@ -10,7 +11,7 @@
         flexographicSelectMultiple:         @entangle('flexographicSelectMultiple').defer
         offsetSelectMultiple:               @entangle('offsetSelectMultiple').defer
      }"
-     x-init="
+    x-init="
      "
 >
 
@@ -49,7 +50,9 @@
                             </x-slot>
                         </x-input>
 
-                        @livewire('create-client-form')
+                        <div class="ml-2">
+                            @livewire('create-client-form')
+                        </div>
                         @component('components.select', ['entities' => \App\Models\Client::all()])
                             @slot('title')
                                 {{ __('Client') }}

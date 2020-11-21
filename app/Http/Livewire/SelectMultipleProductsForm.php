@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Client;
 use App\Models\Product;
-use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
 class SelectMultipleProductsForm extends Component
 {
     public $products = [];
+
+    public $changesSaved = true;
 
     public $flexographics = [];
     public $offsets = [];
@@ -22,14 +22,21 @@ class SelectMultipleProductsForm extends Component
 
     public $flexographicSelectMultiple = '';
     public $offsetSelectMultiple = '';
+    public $changesSavedHTML = '';
 
     public $listeners = [
         'orderModalClosed' => 'init'
     ];
 
+    public function updated() {
+        $this->changesSaved = false;
+        $this->updateChangesSaved();
+    }
+
     public function init()
     {
         $this->products = [];
+        $this->changesSaved = true;
 
         $this->flexographics = [];
         $this->offsets = [];
@@ -42,19 +49,10 @@ class SelectMultipleProductsForm extends Component
 
         $this->initializeFlexographicTable();
         $this->initializeOffsetTable();
+        $this->updateChangesSaved();
     }
 
 //    TODO: Add a name attribute to everything?
-
-    public function pickProduct($id, $amount)
-    {
-        $this->products[$id] = $amount;
-    }
-
-    public function unpickProduct($id)
-    {
-        unset($this->products[$id]);
-    }
 
     public function initializeFlexographicTable()
     {
@@ -70,16 +68,15 @@ class SelectMultipleProductsForm extends Component
                 'index' => $i,
                 'optionsModel' => 'flexographics.' . $i,
                 'amountsModel' => 'flexographicsAmounts.' . $i,
+                'remove' => 'removeRow("flexographic",' . $i . ')'
             ])->render();
         }
 
         $this->flexographicSelectMultiple .= "<button
-            class='flex w-full mt-2 p-2 bg-teal-600 text-center rounded-full'
+            class='flex flex-col w-full h-8 mt-2 p-1 bg-teal-600 rounded-full text-center'
             wire:click='addRow(\"flexographic\")'
             wire:loading.attr='disabled'>
-                <span class='text-center'>
-                    +
-                </span>
+                +
         </button>";
     }
 
@@ -95,17 +92,30 @@ class SelectMultipleProductsForm extends Component
                 'index' => $i,
                 'optionsModel' => 'offsets.' . $i,
                 'amountsModel' => 'offsetsAmounts.' . $i,
+                'remove' => 'removeRow("offset",' . $i . ')'
             ])->render();
         }
 
         $this->offsetSelectMultiple .= "<button
-            class='flex mt-2 p-2 w-full bg-teal-600 text-center rounded-full'
+            class='flex flex-col h-8 mt-2 p-1 w-full bg-teal-600 rounded-full text-center'
             wire:click='addRow(\"offset\")'
             wire:loading.attr='disabled'>
-                <span class='text-center'>
-                    +
-                </span>
+                +
         </button>";
+    }
+
+    public function updateChangesSaved() {
+        $this->changesSavedHTML= '';
+        if($this->changesSaved) {
+            $this->changesSavedHTML .= "<span class=\"px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800\" >
+                All Changes Saved
+            </span >";
+        }
+        else {
+            $this->changesSavedHTML .= "<span class=\"px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800\">
+                Some Changes Not Saved
+            </span >";
+        }
     }
 
     public function addRow($type)
@@ -121,6 +131,21 @@ class SelectMultipleProductsForm extends Component
         }
     }
 
+    public function removeRow($type, $index)
+    {
+        if ($type === 'flexographic') {
+            $this->nRowsFlexographic--;
+            unset($this->flexographics[$index]);
+            unset($this->flexographicsAmounts[$index]);
+            $this->initializeFlexographicTable();
+        } else if ($type === 'offset') {
+            $this->nRowsOffset--;
+            unset($this->offsets[$index]);
+            unset($this->offsetsAmounts[$index]);
+            $this->initializeOffsetTable();
+        }
+    }
+
     public function done()
     {
         for ($i = 0; $i < count($this->flexographics); $i++) {
@@ -131,6 +156,8 @@ class SelectMultipleProductsForm extends Component
             $this->products[$this->offsets[$i]] = $this->offsetsAmounts[$i];
         }
 
+        $this->changesSaved = true;
+        $this->updateChangesSaved();
         $this->emit('productsChosen', $this->products);
     }
 

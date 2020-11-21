@@ -5,10 +5,10 @@
                 <div class="w-8 h-full font-bold text-gray-800 mt-2 text-center">
                     {{ $index }}
                 </div>
-                <select wire:model="{{ $optionsModel }}" class="flex-1 m-1 h-8 form-select w-full">
+                <select wire:model="{{ $optionsModel }}" class="flex-1 p-1 m-1 h-8 form-select w-full">
                     <option>...</option>
                     @foreach($entities as $entity)
-                        <option value="{{ $entity->id }}">{{ $entity->id }}</option>
+                        <option class="p-1" value="{{ $entity->id }}">{{ $entity->id }}</option>
                     @endforeach
                 </select>
                 <div class="w-full flex-1">
@@ -17,6 +17,12 @@
                                class="p-1 appearance-none outline-none w-full text-gray-800 ">
                     </div>
                 </div>
+                <button
+                    class='h-8 m-1 ml-1 py-1 px-3 bg-red-700 rounded-lg text-center text-white'
+                    wire:click="{{ $remove }}"
+                    wire:loading.attr='disabled'>
+                    -
+                </button>
             </div>
         </div>
     </div>
