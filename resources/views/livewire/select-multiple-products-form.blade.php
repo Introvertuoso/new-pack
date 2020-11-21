@@ -1,5 +1,5 @@
 <div
-    class="relative"
+    class="relative h-full overflow-auto"
     x-data="{
         products:                           @entangle('products').defer
         amounts:                            @entangle('amounts').defer
