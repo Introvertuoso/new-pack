@@ -12,17 +12,17 @@
     }
 </style>
 
-<div class="flex-auto flex flex-col m-2">
-    <h1 class="text-base">
+<div class="flex-auto flex flex-col">
+    <label class="text-base">
         {{ $title }}
 {{--        <div class="ml-10 rounded-md shadow">--}}
 {{--            @livewire('create-client-form')--}}
 {{--        </div>--}}
-    </h1>
+    </label>
 
     <div class="flex flex-col items-center relative">
         <div class="w-full  svelte-1l8159u">
-            <div class="mt-2 bg-white p-1 flex border border-gray-200 rounded svelte-1l8159u">
+            <div class="h-8 mt-1 bg-white p-1 flex border border-gray-200 rounded svelte-1l8159u">
                 <div class="flex flex-auto flex-wrap">
                 </div>
 
@@ -46,7 +46,7 @@
 {{--                    </button>--}}
                 </div>
                 <div onclick="toggleList('{{ $title }}')"
-                    class="cursor-pointer text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
+                    class="cursor-pointer text-gray-300 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
                     <button class="w-6 h-6 text-gray-600 outline-none focus:outline-none">
                         <svg class="drop-button feather feather-chevron-up w-4 h-4" fill="none" height="100%" stroke="currentColor"
                              style="transform: rotate(180deg)"
@@ -73,7 +73,7 @@
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
                                     <div class="mx-2 leading-6">
-                                        {{ $entity->client_name }}
+                                        {{ $entity->id }}
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 wire:loading.attr="disabled">
                                 <div class="w-full items-center flex">
                                     <div class="mx-2 leading-6">
-                                        {{ $entity->client_name }}
+                                        {{ $entity->id }}
                                     </div>
                                 </div>
                             </div>
@@ -98,13 +98,13 @@
                         <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-600">
                             <div
                                 onclick="toggleList('{{ $title }}')"
-                                class="flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 "
+                                class="flex w-full items-center p-2 pl-2 border-transparent bg-white border-l-2 relative hover:bg-teal-600 hover:border-teal-600"
                                 wire:click="{{ $func }}({{ $entity->id }})"
                                 wire:loading.attr="disabled">
 {{--                                TODO: Make these abstracted?--}}
                                 <div class="w-full items-center flex">
                                     <div class="mx-2 leading-6">
-                                        {{ $entity->client_name }}
+                                        {{ $entity->id }}
                                     </div>
                                 </div>
                             </div>

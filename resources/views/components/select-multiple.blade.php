@@ -1,8 +1,8 @@
 <div
     class="m-2">
-    <h1 class="text-base">
+    <label class="m-0 p-0 text-base">
         {{ $title }}
-    </h1>
+    </label>
 
     <div>
         <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>

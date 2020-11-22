@@ -9,9 +9,14 @@
     </x-jet-button>
 
     <x-modal>
+        <x-slot name="modalClosedEvent">
+            {{ __('rawMaterialsModalClosed') }}
+        </x-slot>
+
         <x-slot name="title">
             {{ __('Add Raw Material') }}
         </x-slot>
+
         <x-slot name="content">
             <x-input>
                 <x-slot name="title">

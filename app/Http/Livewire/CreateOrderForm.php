@@ -5,13 +5,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Client;
 use App\Models\Order;
-use App\Models\Product;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 use Livewire\Component;
-use function DeepCopy\deep_copy;
-
 
 class CreateOrderForm extends Component
 {
@@ -34,8 +28,37 @@ class CreateOrderForm extends Component
         'productsChosen' => 'receiveProducts',
     ];
 
+    public function updatedDiscount() {
+        $this->calculateGrandTotal();
+    }
+
+    public function updatedTotalPreDiscount() {
+        $this->calculateGrandTotal();
+    }
+
     public function receiveProducts($products) {
         $this->products = $products;
+    }
+
+    public function calculateGrandTotal() {
+        $this->total = $this->totalPreDiscount - ($this->totalPreDiscount * $this->discount / 100);
+    }
+
+    public function completeOrderCreation() {
+        // TODO: Do this for all:
+        // TODO: Required field trick from course on the front-end as well as on the back-end
+        $order = new Order();
+        $order->approved = $this->approved;
+        $order->total = $this->total;
+        $order->client_id = $this->client->id;
+        $order->user_id = $this->user->id;
+        $order->save();
+
+        foreach($this->products as $productID => $amount) {
+            $order->products()->attach($productID, ['amount' => $amount]);
+        }
+
+//        $this->emit('orderCreationCompleted');
     }
 
     public function confirmOrderCreation()
@@ -61,30 +84,18 @@ class CreateOrderForm extends Component
         $this->clientName = $client->name;
     }
 
-    public function pickProduct($key) {
-        $product = Product::where('id', $key)->first();
-        $this->products[$key] = $product;
-    }
-
-    public function unpickProduct($key) {
-        unset($this->products[$key]);
-    }
+//    public function pickProduct($key) {
+//        $product = Product::where('id', $key)->first();
+//        $this->products[$key] = $product;
+//    }
+//
+//    public function unpickProduct($key) {
+//        unset($this->products[$key]);
+//    }
 
     public function createOrder() {
-//        // TODO: Do this for all:
-//        // TODO: Required field trick from course on the front-end as well as on the back-end
-//        $order = new Order();
-//        $order->approved = $this->approved;
-//        $order->total = $this->total;
-//        $order->client_id = $this->client->id;
-//        $order->user_id = $this->user->id;
-//        $order->save();
-//
-//
-//
-//        $this->emit('orderCreationCompleted');
-
         dump($this->products);
+        $this->completeOrderCreation();
     }
 
     public function render() {

@@ -22,41 +22,45 @@
             <div>
                 <div class="grid grid-cols-2 grid-rows-1 divide-x divide-gray-400">
                     <div class="pr-6">
-                        <x-input>
-                            <x-slot name="title">
-                                {{ __('Client Name') }}
-                            </x-slot>
-                            <x-slot name="readonly">
-                                {{ __('false') }}
-                            </x-slot>
-                            <x-slot name="attribute">
-                                {{ __('clientName') }}
-                            </x-slot>
-                            <x-slot name="type">
-                                {{ __('text') }}
-                            </x-slot>
-                            <x-slot name="placeholder">
-                                {{ __('ClientName') }}
-                            </x-slot>
-                        </x-input>
+                        <div class="p-2">
+                            <x-input>
+                                <x-slot name="title">
+                                    {{ __('Client Name') }}
+                                </x-slot>
+                                <x-slot name="readonly">
+                                    {{ __('false') }}
+                                </x-slot>
+                                <x-slot name="attribute">
+                                    {{ __('clientName') }}
+                                </x-slot>
+                                <x-slot name="type">
+                                    {{ __('text') }}
+                                </x-slot>
+                                <x-slot name="placeholder">
+                                    {{ __('ClientName') }}
+                                </x-slot>
+                            </x-input>
+                        </div>
 
-                        <x-input>
-                            <x-slot name="title">
-                                {{ __('Amount') }}
-                            </x-slot>
-                            <x-slot name="readonly">
-                                {{ __('true') }}
-                            </x-slot>
-                            <x-slot name="attribute">
-                                {{ __('amount') }}
-                            </x-slot>
-                            <x-slot name="type">
-                                {{ __('text') }}
-                            </x-slot>
-                            <x-slot name="placeholder">
-                                {{ __('Amount') }}
-                            </x-slot>
-                        </x-input>
+                        <div class="p-2">
+                            <x-input>
+                                <x-slot name="title">
+                                    {{ __('Amount') }}
+                                </x-slot>
+                                <x-slot name="readonly">
+                                    {{ __('true') }}
+                                </x-slot>
+                                <x-slot name="attribute">
+                                    {{ __('amount') }}
+                                </x-slot>
+                                <x-slot name="type">
+                                    {{ __('text') }}
+                                </x-slot>
+                                <x-slot name="placeholder">
+                                    {{ __('Amount') }}
+                                </x-slot>
+                            </x-input>
+                        </div>
 
                         @component("components.radio-group", ['entities' => ['Flexographic', 'Offset']])
                             @slot('title')
