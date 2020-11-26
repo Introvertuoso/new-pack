@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Client;
 use App\Models\RawMaterial;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 
@@ -20,7 +21,7 @@ class CreateRawMaterialForm extends Component
     public function confirmRawMaterialCreation()
     {
         $this->name = '';
-        $this->condition =  '';
+        $this->condition = '';
         $this->amount = '';
 
         $this->dispatchBrowserEvent('confirming-create-raw-material');
@@ -39,7 +40,12 @@ class CreateRawMaterialForm extends Component
         $this->emit('rawMaterialCreationCompleted');
     }
 
-    public function render() {
-        return view('livewire.create-raw-material-form');
+    public function render()
+    {
+        if (Gate::allows('write-raw-material')) {
+            return view('livewire.create-raw-material-form');
+        } else {
+            return "";
+        }
     }
 }

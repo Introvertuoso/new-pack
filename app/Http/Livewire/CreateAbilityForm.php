@@ -4,6 +4,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Ability;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 
@@ -31,6 +32,12 @@ class CreateAbilityForm extends Component
     }
 
     public function render() {
-        return view('livewire.create-ability-form');
+        if (Gate::allows('write-ability')) {
+            return view('livewire.create-ability-form');
+        }
+        else {
+            return "";
+        }
+
     }
 }

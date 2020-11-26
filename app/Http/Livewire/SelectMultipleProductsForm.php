@@ -171,7 +171,7 @@ class SelectMultipleProductsForm extends Component
     public function removeRow($type, $index)
     {
         if ($type === 'flexographic') {
-//            TODO: Fix remove and re-add bug
+//            TODO: Fix remove not actually removing bug
             $this->nRowsFlexographic--;
             \array_splice($this->flexographic, $index, 1);
             \array_splice($this->flexographicAmounts, $index, 1);

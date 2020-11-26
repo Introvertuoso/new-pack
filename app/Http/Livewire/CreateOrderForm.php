@@ -1,10 +1,13 @@
 <?php
 
-
 namespace App\Http\Livewire;
 
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\User;
+use App\Notifications\OrderCreated;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class CreateOrderForm extends Component
@@ -58,6 +61,10 @@ class CreateOrderForm extends Component
             $order->products()->attach($productID, ['amount' => $amount]);
         }
 
+        Notification::send(request()->user(), new OrderCreated($order));
+//        request()->user()->notify(new OrderCreated());
+        $this->redirect(url()->current());
+
 //        $this->emit('orderCreationCompleted');
     }
 
@@ -99,6 +106,11 @@ class CreateOrderForm extends Component
     }
 
     public function render() {
-        return view('livewire.create-order-form');
+        if (Gate::allows('write-order')) {
+            return view('livewire.create-order-form');
+        }
+        else {
+            return "";
+        }
     }
 }

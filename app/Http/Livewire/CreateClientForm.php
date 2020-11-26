@@ -4,6 +4,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 
@@ -16,13 +17,14 @@ class CreateClientForm extends Component
     public function confirmClientCreation()
     {
         $this->name = '';
-        $this->contact =  '';
+        $this->contact = '';
         $this->address = '';
 
 //        $this->dispatchBrowserEvent('confirming-create-client');
     }
 
-    public function createClient() {
+    public function createClient()
+    {
         $client = new Client();
         $client->name = $this->name;
         $client->contact = $this->contact;
@@ -31,7 +33,12 @@ class CreateClientForm extends Component
         $this->emit('clientCreationCompleted');
     }
 
-    public function render() {
-        return view('livewire.create-client-form');
+    public function render()
+    {
+        if (Gate::allows('write-client')) {
+            return view('livewire.create-client-form');
+        } else {
+            return "";
+        }
     }
 }
